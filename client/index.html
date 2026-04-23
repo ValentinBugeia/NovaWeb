@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[NOM] — Espace Client</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/portal.css" />
+</head>
+<body>
+
+  <nav class="portal-nav">
+    <a href="../" class="nav-logo font-mono">
+      <span class="c-blue">&lt;</span>[NOM]<span class="c-blue">/&gt;</span>
+    </a>
+    <a href="../" class="nav-back font-mono">← Retour au site</a>
+  </nav>
+
+  <main class="auth-main">
+    <div class="auth-box">
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Connexion</button>
+        <button class="auth-tab" data-tab="register">Créer un compte</button>
+      </div>
+
+      <!-- CONNEXION -->
+      <form id="loginForm" class="auth-form">
+        <h1 class="auth-title">Bon retour</h1>
+        <p class="auth-sub font-mono c-blue">// Accédez à vos projets</p>
+
+        <div class="form-field">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="jean@email.com" required />
+        </div>
+        <div class="form-field">
+          <label for="loginPassword">Mot de passe</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required />
+        </div>
+
+        <p class="auth-error" id="loginError"></p>
+        <button type="submit" class="btn-auth">
+          <span id="loginLabel">Se connecter</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <!-- INSCRIPTION -->
+      <form id="registerForm" class="auth-form hidden">
+        <h1 class="auth-title">Créer un compte</h1>
+        <p class="auth-sub font-mono c-blue">// Suivez l'avancée de vos projets</p>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="regPrenom">Prénom</label>
+            <input type="text" id="regPrenom" placeholder="Jean" required />
+          </div>
+          <div class="form-field">
+            <label for="regNom">Nom</label>
+            <input type="text" id="regNom" placeholder="Dupont" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder="jean@email.com" required />
+        </div>
+        <div class="form-field">
+          <label for="regPassword">Mot de passe <span style="color:var(--gray)">(6 caractères min.)</span></label>
+          <input type="password" id="regPassword" placeholder="••••••••" required />
+        </div>
+
+        <p class="auth-error" id="registerError"></p>
+        <button type="submit" class="btn-auth">
+          <span id="registerLabel">Créer mon compte</span>
+          <span>→</span>
+        </button>
+      </form>
+
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="../firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

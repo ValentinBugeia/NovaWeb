@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>SkillUp Academy — Formez-vous en ligne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0d1117;--bg2:#161b22;--green:#22c55e;--green-dim:rgba(34,197,94,.1);--blue:#3b82f6;--white:#f0faf4;--gray:#8b949e;--border:rgba(34,197,94,.15)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--white)}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 32px}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center}
+    .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:8px}
+    .logo-icon{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+    .logo span{color:var(--green)}
+    .nav-links{display:flex;gap:28px}
+    .nav-links a{font-size:.82rem;color:var(--gray);font-weight:500;transition:color .25s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-right{display:flex;gap:10px}
+    .btn-ghost{border:1px solid var(--border);color:var(--white);padding:8px 16px;border-radius:6px;font-size:.8rem;transition:border-color .25s}
+    .btn-ghost:hover{border-color:var(--green)}
+    .btn-green{background:var(--green);color:#000;padding:8px 16px;border-radius:6px;font-size:.8rem;font-weight:700;transition:background .25s}
+    .btn-green:hover{background:#16a34a}
+
+    /* HERO */
+    .hero{padding:140px 0 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(34,197,94,.08),transparent 70%)}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-dim);border:1px solid var(--border);border-radius:100px;padding:6px 16px;font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:24px}
+    .hero h1{font-size:clamp(2.4rem,4vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:20px}
+    .hero h1 span{color:var(--green)}
+    .hero p{font-size:1rem;color:var(--gray);line-height:1.7;margin-bottom:32px}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary{background:var(--green);color:#000;padding:14px 28px;border-radius:8px;font-weight:700;font-size:.9rem;transition:background .25s}
+    .btn-primary:hover{background:#16a34a}
+    .btn-secondary{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--white);padding:14px 28px;border-radius:8px;font-size:.9rem;transition:border-color .25s}
+    .btn-secondary:hover{border-color:var(--green)}
+    .hero-trust{display:flex;align-items:center;gap:16px;margin-top:28px;font-size:.82rem;color:var(--gray)}
+    .trust-avatars{display:flex}
+    .trust-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,rgba(34,197,94,.4),rgba(34,197,94,.1));border:2px solid var(--bg);margin-left:-8px}
+    .trust-avatar:first-child{margin-left:0}
+    .hero-right{position:relative}
+    .course-preview{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .cp-video{background:linear-gradient(135deg,#0d1a0d,#162216);height:180px;display:flex;align-items:center;justify-content:center;position:relative}
+    .cp-play{width:52px;height:52px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;transition:transform .25s}
+    .cp-play:hover{transform:scale(1.1)}
+    .cp-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,.1)}
+    .cp-progress-bar{width:35%;height:100%;background:var(--green)}
+    .cp-body{padding:20px}
+    .cp-body h3{font-size:.95rem;font-weight:700;margin-bottom:8px}
+    .cp-body p{font-size:.78rem;color:var(--gray);margin-bottom:16px}
+    .cp-modules{display:flex;flex-direction:column;gap:6px}
+    .cp-module{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;font-size:.78rem;cursor:pointer;transition:background .25s}
+    .cp-module:hover{background:rgba(255,255,255,.04)}
+    .cp-module.active{background:var(--green-dim)}
+    .cp-module .status{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0}
+    .status-done{background:var(--green);color:#000}
+    .status-active{background:rgba(34,197,94,.2);border:1px solid var(--green);color:var(--green)}
+    .status-locked{background:rgba(255,255,255,.08);color:var(--gray)}
+    .cp-module .title{flex:1;color:var(--white)}
+    .cp-module.locked .title{color:var(--gray)}
+    .cp-module .duration{font-size:.7rem;color:var(--gray)}
+
+    /* STATS */
+    .stats{padding:48px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:32px}
+    .stat-val{font-size:2rem;font-weight:800;color:var(--green)}
+    .stat-label{font-size:.78rem;color:var(--gray);margin-top:4px}
+
+    /* COURSES */
+    .courses{padding:100px 0}
+    .section-tag{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--green);display:block;margin-bottom:10px;font-weight:600}
+    .section-title{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-0.5px;margin-bottom:12px}
+    .section-desc{font-size:.9rem;color:var(--gray);margin-bottom:48px;max-width:480px}
+    .courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .course-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .3s,border-color .3s}
+    .course-card:hover{transform:translateY(-4px);border-color:var(--green)}
+    .course-thumb{height:140px;position:relative;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+    .course-thumb--1{background:linear-gradient(135deg,#0d1a0d,#1a3520)}
+    .course-thumb--2{background:linear-gradient(135deg,#0d0d1a,#1a1a35)}
+    .course-thumb--3{background:linear-gradient(135deg,#1a0d0d,#352020)}
+    .course-thumb--4{background:linear-gradient(135deg,#0d1a1a,#1a3535)}
+    .course-thumb--5{background:linear-gradient(135deg,#1a1a0d,#35351a)}
+    .course-thumb--6{background:linear-gradient(135deg,#1a0d1a,#351a35)}
+    .course-badge{position:absolute;top:12px;right:12px;background:var(--green);color:#000;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:100px}
+    .course-body{padding:20px}
+    .course-cat{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:8px;font-weight:600}
+    .course-body h3{font-size:.92rem;font-weight:700;margin-bottom:8px;line-height:1.4}
+    .course-meta{display:flex;gap:16px;font-size:.75rem;color:var(--gray);margin-bottom:14px}
+    .course-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+    .course-price{font-size:1.05rem;font-weight:700;color:var(--white)}
+    .course-price .original{font-size:.78rem;color:var(--gray);text-decoration:line-through;margin-right:6px}
+    .course-rating{font-size:.75rem;color:var(--gray)}.course-rating strong{color:var(--white)}
+
+    /* INSTRUCTOR */
+    .instructor{padding:100px 0;background:var(--bg2)}
+    .instructor-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .instructor-avatar{width:100%;aspect-ratio:1;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:6rem;max-width:360px}
+    .instructor-content .section-tag{color:var(--green)}
+    .instructor-content h2{font-size:2rem;font-weight:800;margin:12px 0 16px}
+    .instructor-content p{font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:24px}
+    .instructor-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .inst-stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px}
+    .inst-stat-val{font-size:1.5rem;font-weight:800;color:var(--green)}
+    .inst-stat-label{font-size:.75rem;color:var(--gray);margin-top:2px}
+
+    /* FOOTER */
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:60px 0 32px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+    .footer-brand h3{font-size:1rem;font-weight:800;margin-bottom:12px}
+    .footer-brand h3 span{color:var(--green)}
+    .footer-brand p{font-size:.8rem;color:var(--gray);line-height:1.7}
+    .footer-col h4{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+    .footer-col ul{display:flex;flex-direction:column;gap:10px}
+    .footer-col a{font-size:.82rem;color:var(--gray);transition:color .25s}
+    .footer-col a:hover{color:var(--green)}
+    .footer-bottom{display:flex;justify-content:space-between;padding-top:32px;border-top:1px solid var(--border);font-size:.75rem;color:var(--gray)}
+
+    @media(max-width:1024px){.courses-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.hero-inner,.instructor-inner{grid-template-columns:1fr}.stats-inner{grid-template-columns:1fr 1fr}.courses-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:8px}.container{padding:0 20px}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><div class="logo-icon">🎓</div>Skill<span>Up</span> Academy</div>
+    <ul class="nav-links">
+      <li><a href="#courses">Formations</a></li>
+      <li><a href="#instructor">Formateurs</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Entreprises</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#" class="btn-ghost">Se connecter</a>
+      <a href="#courses" class="btn-green">Commencer gratuitement</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🎓 +150 formations disponibles</div>
+        <h1>Apprenez les<br/>compétences de <span>demain</span></h1>
+        <p>Des formations 100% en ligne, dispensées par des experts du secteur. À votre rythme, depuis n'importe où.</p>
+        <div class="hero-btns">
+          <a href="#courses" class="btn-primary">Explorer les formations</a>
+          <a href="#" class="btn-secondary">Essai gratuit 7 jours</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <div class="trust-avatar"></div><div class="trust-avatar"></div><div class="trust-avatar"></div><div class="trust-avatar"></div>
+          </div>
+          <span>Rejoignez <strong>+18 000</strong> apprenants actifs</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="course-preview">
+          <div class="cp-video">
+            <div class="cp-play">▶</div>
+            <div class="cp-progress"><div class="cp-progress-bar"></div></div>
+          </div>
+          <div class="cp-body">
+            <h3>Développement Web Full-Stack</h3>
+            <p>Module 4 sur 12 — React & API REST</p>
+            <div class="cp-modules">
+              <div class="cp-module"><div class="status status-done">✓</div><span class="title">Introduction à React</span><span class="duration">45 min</span></div>
+              <div class="cp-module"><div class="status status-done">✓</div><span class="title">Composants & Props</span><span class="duration">60 min</span></div>
+              <div class="cp-module active"><div class="status status-active">▶</div><span class="title">Hooks & State</span><span class="duration">75 min</span></div>
+              <div class="cp-module locked"><div class="status status-locked">🔒</div><span class="title">Fetch API & REST</span><span class="duration">90 min</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container">
+    <div class="stats-inner">
+      <div><div class="stat-val">18 000+</div><div class="stat-label">Apprenants actifs</div></div>
+      <div><div class="stat-val">150+</div><div class="stat-label">Formations disponibles</div></div>
+      <div><div class="stat-val">4.8 ★</div><div class="stat-label">Note moyenne</div></div>
+      <div><div class="stat-val">96%</div><div class="stat-label">Taux de complétion</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="courses" id="courses">
+  <div class="container">
+    <span class="section-tag">Catalogue</span>
+    <h2 class="section-title">Formations populaires</h2>
+    <p class="section-desc">Des formations conçues par des professionnels, mises à jour régulièrement pour rester à la pointe.</p>
+    <div class="courses-grid">
+      <div class="course-card"><div class="course-thumb course-thumb--1">⚛️</div><div class="course-body"><div class="course-cat">Développement Web</div><h3>React & Next.js — De zéro à expert</h3><div class="course-meta"><span>📹 42 leçons</span><span>⏱ 18h</span><span>👤 3 420</span></div><div class="course-footer"><div class="course-price"><span class="original">79 €</span>49 €</div><div class="course-rating"><strong>4.9</strong> ★ (856)</div></div></div></div>
+      <div class="course-card"><div class="course-thumb course-thumb--2"><div class="course-badge">Nouveau</div>🤖</div><div class="course-body"><div class="course-cat">Intelligence Artificielle</div><h3>ChatGPT & IA — Boostez votre productivité</h3><div class="course-meta"><span>📹 28 leçons</span><span>⏱ 8h</span><span>👤 5 210</span></div><div class="course-footer"><div class="course-price">39 €</div><div class="course-rating"><strong>4.8</strong> ★ (1 240)</div></div></div></div>
+      <div class="course-card"><div class="course-thumb course-thumb--3">📊</div><div class="course-body"><div class="course-cat">Data & Analytics</div><h3>Python pour la Data Science</h3><div class="course-meta"><span>📹 56 leçons</span><span>⏱ 24h</span><span>👤 2 180</span></div><div class="course-footer"><div class="course-price"><span class="original">99 €</span>69 €</div><div class="course-rating"><strong>4.9</strong> ★ (642)</div></div></div></div>
+      <div class="course-card"><div class="course-thumb course-thumb--4">🎨</div><div class="course-body"><div class="course-cat">Design UX/UI</div><h3>Figma — Design de A à Z</h3><div class="course-meta"><span>📹 35 leçons</span><span>⏱ 14h</span><span>👤 4 050</span></div><div class="course-footer"><div class="course-price">45 €</div><div class="course-rating"><strong>4.7</strong> ★ (928)</div></div></div></div>
+      <div class="course-card"><div class="course-thumb course-thumb--5">📈</div><div class="course-body"><div class="course-cat">Marketing Digital</div><h3>SEO & Growth Hacking 2025</h3><div class="course-meta"><span>📹 40 leçons</span><span>⏱ 16h</span><span>👤 3 780</span></div><div class="course-footer"><div class="course-price">55 €</div><div class="course-rating"><strong>4.8</strong> ★ (1 050)</div></div></div></div>
+      <div class="course-card"><div class="course-thumb course-thumb--6"><div class="course-badge">Bestseller</div>🔐</div><div class="course-body"><div class="course-cat">Cybersécurité</div><h3>Sécurité informatique — Fondamentaux</h3><div class="course-meta"><span>📹 38 leçons</span><span>⏱ 20h</span><span>👤 1 920</span></div><div class="course-footer"><div class="course-price"><span class="original">89 €</span>59 €</div><div class="course-rating"><strong>4.9</strong> ★ (480)</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="instructor" id="instructor">
+  <div class="container">
+    <div class="instructor-inner">
+      <div class="instructor-avatar">👨‍💻</div>
+      <div class="instructor-content">
+        <span class="section-tag">Formateur en vedette</span>
+        <h2>Alexandre Morin</h2>
+        <p>Développeur full-stack avec 12 ans d'expérience. Ancien lead dev chez BlaBlaCar et OVHcloud, Alexandre partage son expertise pratique à travers des formations claires et efficaces.</p>
+        <p>Ses cours réunissent plus de 8 000 apprenants et maintiennent une note moyenne de 4.9/5.</p>
+        <div class="instructor-stats">
+          <div class="inst-stat"><div class="inst-stat-val">12</div><div class="inst-stat-label">Cours publiés</div></div>
+          <div class="inst-stat"><div class="inst-stat-val">8 200+</div><div class="inst-stat-label">Étudiants</div></div>
+          <div class="inst-stat"><div class="inst-stat-val">4.9 ★</div><div class="inst-stat-label">Note moyenne</div></div>
+          <div class="inst-stat"><div class="inst-stat-val">12 ans</div><div class="inst-stat-label">D'expérience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>🎓 Skill<span>Up</span> Academy</h3><p>La plateforme de formation en ligne qui vous propulse vers votre prochain niveau professionnel.</p></div>
+      <div class="footer-col"><h4>Formations</h4><ul><li><a href="#">Développement Web</a></li><li><a href="#">IA & Data</a></li><li><a href="#">Design</a></li><li><a href="#">Marketing</a></li></ul></div>
+      <div class="footer-col"><h4>Entreprises</h4><ul><li><a href="#">Teams</a></li><li><a href="#">Certification</a></li><li><a href="#">API</a></li></ul></div>
+      <div class="footer-col"><h4>Support</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li><li><a href="#">Blog</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 SkillUp Academy — Tous droits réservés</span><span>RGPD · CGU · Mentions légales</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

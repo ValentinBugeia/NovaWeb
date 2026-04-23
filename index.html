@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Agence de création de sites web propulsée par l'IA — Site vitrine, e-commerce, landing page. Design sur-mesure, SEO inclus, responsive. Devis gratuit, sans engagement." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="[NOM] — Création de sites web par IA" />
+  <meta property="og:description" content="Agence de création de sites web propulsée par l'IA. Design sur-mesure, SEO inclus, responsive. Devis gratuit et sans engagement." />
+  <meta property="og:image" content="assets/screenshots/cabinet-moreau.jpg" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="[NOM] — Création de sites web par IA" />
+  <meta name="twitter:description" content="Agence de création de sites web propulsée par l'IA. Design sur-mesure, SEO inclus. Devis gratuit." />
+  <meta name="twitter:image" content="assets/screenshots/cabinet-moreau.jpg" />
+  <title>[NOM] — Création de sites web par IA</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="loading">
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <div class="loader__bar"></div>
+      <span class="loader__label font-mono" id="loaderPct">0%</span>
+    </div>
+  </div>
+
+  <!-- CURSEUR -->
+  <div class="cursor-spotlight" id="spotlight"></div>
+  <div class="cursor__ring" id="cursorRing"></div>
+  <div class="cursor__dot" id="cursorDot"></div>
+
+  <!-- MENU PLEIN ÉCRAN (hors nav pour éviter le bug backdrop-filter) -->
+  <div class="fullscreen-menu" id="fullMenu">
+    <div class="fullscreen-menu__inner">
+      <ul class="fullscreen-menu__list">
+        <li><a href="#services"  data-num="01">Services</a></li>
+        <li><a href="#process"   data-num="02">Processus</a></li>
+        <li><a href="#portfolio" data-num="03">Réalisations</a></li>
+        <li><a href="#devis"     data-num="04">Devis</a></li>
+        <li><a href="client/"    data-num="05">Espace client</a></li>
+      </ul>
+      <div class="fullscreen-menu__footer">
+        <p class="font-mono c-blue">contact@[nom].fr</p>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <!-- PROMO BAR -->
+    <div class="promo-bar">
+      <span class="promo-bar__tag font-mono">Offre de lancement</span>
+      <span class="promo-bar__text">— <strong>50% de réduction</strong> sur toutes nos prestations —</span>
+      <a href="#devis" class="promo-bar__cta font-mono">En profiter →</a>
+    </div>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+    <a href="#home" class="nav__logo font-mono">
+      <span class="c-blue">&lt;</span>[NOM]<span class="c-blue">/&gt;</span>
+    </a>
+    <div class="nav__center font-mono" id="navTime">00:00:00</div>
+    <div class="nav__right">
+      <a href="client/" class="nav__client font-mono">Espace client</a>
+      <a href="#devis" class="nav__devis">Devis gratuit</a>
+      <button class="nav__burger" id="burger">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+      </button>
+    </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <canvas class="hero__canvas" id="canvas"></canvas>
+    <div class="noise"></div>
+
+    <div class="hero__content">
+      <!-- Label -->
+      <div class="hero__eyebrow reveal-clip">
+        <span class="font-mono c-blue">// IA × Design × Code</span>
+      </div>
+
+      <!-- Titre massif -->
+      <div class="hero__headline">
+        <div class="line-wrap reveal-clip" style="--d:.05s">
+          <span class="hero__word">Votre site web,</span>
+        </div>
+        <div class="line-wrap reveal-clip" style="--d:.15s">
+          <span class="hero__word hero__word--outline">sur-mesure,</span>
+        </div>
+        <div class="line-wrap reveal-clip" style="--d:.25s">
+          <span class="hero__word c-blue">propulsé par l'IA.</span>
+        </div>
+      </div>
+
+      <!-- Sous-titre -->
+      <div class="hero__sub reveal-fade" style="--d:.5s">
+        <p>Nous créons des sites web performants propulsés par l'IA.<br />Obtenez un devis gratuit, sans engagement.</p>
+        <a href="#devis" class="btn-main">
+          <span>Demander un devis</span>
+          <div class="btn-main__arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Badges bas de page -->
+    <div class="hero__stats reveal-fade" style="--d:.7s">
+
+      <!-- Avis Google -->
+      <div class="hero__badge">
+        <svg class="hero__badge-google" width="22" height="22" viewBox="0 0 24 24" aria-label="Google">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <div class="hero__badge-body">
+          <div class="hero__badge-stars">★★★★★</div>
+          <p class="font-mono">Avis Google</p>
+        </div>
+      </div>
+
+      <!-- Devis gratuit -->
+      <div class="hero__badge">
+        <span class="hero__badge-check">✓</span>
+        <div class="hero__badge-body">
+          <span class="hero__badge-label font-mono">Gratuit</span>
+          <p class="font-mono">Devis sans engagement</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint">
+      <div class="scroll-hint__track"><div class="scroll-hint__thumb"></div></div>
+      <span class="font-mono">scroll</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       MARQUEE
+  ══════════════════════════════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Design sur-mesure</span><span class="c-blue">✦</span>
+      <span>SEO inclus</span><span class="c-blue">✦</span>
+      <span>Responsive mobile</span><span class="c-blue">✦</span>
+      <span>Devis gratuit</span><span class="c-blue">✦</span>
+      <span>Sans engagement</span><span class="c-blue">✦</span>
+      <span>Propulsé par l'IA</span><span class="c-blue">✦</span>
+      <span>Support inclus</span><span class="c-blue">✦</span>
+      <span>100% personnalisé</span><span class="c-blue">✦</span>
+      <span>Design sur-mesure</span><span class="c-blue">✦</span>
+      <span>SEO inclus</span><span class="c-blue">✦</span>
+      <span>Responsive mobile</span><span class="c-blue">✦</span>
+      <span>Devis gratuit</span><span class="c-blue">✦</span>
+      <span>Sans engagement</span><span class="c-blue">✦</span>
+      <span>Propulsé par l'IA</span><span class="c-blue">✦</span>
+      <span>Support inclus</span><span class="c-blue">✦</span>
+      <span>100% personnalisé</span><span class="c-blue">✦</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SERVICES
+  ══════════════════════════════════════ -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// 01 — Services</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Ce que nous</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">créons pour vous</span></span>
+        </h2>
+      </div>
+
+      <div class="services-list">
+
+        <div class="service-item reveal-fade" style="--d:0s">
+          <div class="service-item__num font-mono">01</div>
+          <div class="service-item__body">
+            <h3>Site Vitrine</h3>
+            <p>Présentez votre entreprise avec un site professionnel qui inspire confiance et convertit vos visiteurs en clients.</p>
+            <ul>
+              <li>Design 100% personnalisé</li>
+              <li>Responsive & mobile-first</li>
+              <li>Optimisé SEO & performance</li>
+            </ul>
+          </div>
+          <div class="service-item__price">
+            <span class="price-old">799 €</span>
+            À partir de<br/><strong>399 €</strong>
+            <span class="price-badge">-50%</span>
+          </div>
+          <a href="#devis" class="service-item__cta">Obtenir un devis →</a>
+        </div>
+
+        <div class="service-item reveal-fade" style="--d:.1s">
+          <div class="service-item__num font-mono">02</div>
+          <div class="service-item__body">
+            <div class="service-item__badge">Populaire</div>
+            <h3>E-commerce</h3>
+            <p>Vendez en ligne 24h/24 avec une boutique performante, sécurisée et facile à administrer.</p>
+            <ul>
+              <li>Paiement Stripe intégré</li>
+              <li>Dashboard produits</li>
+              <li>Tunnel d'achat optimisé</li>
+            </ul>
+          </div>
+          <div class="service-item__price">
+            <span class="price-old">1 499 €</span>
+            À partir de<br/><strong>749 €</strong>
+            <span class="price-badge">-50%</span>
+          </div>
+          <a href="#devis" class="service-item__cta">Obtenir un devis →</a>
+        </div>
+
+        <div class="service-item reveal-fade" style="--d:.2s">
+          <div class="service-item__num font-mono">03</div>
+          <div class="service-item__body">
+            <h3>Landing Page</h3>
+            <p>Une page unique ultra-optimisée pour lancer un produit, une offre, ou capturer des leads.</p>
+            <ul>
+              <li>Ultra-rapide (Core Web Vitals)</li>
+              <li>Copywriting IA inclus</li>
+              <li>A/B testing ready</li>
+            </ul>
+          </div>
+          <div class="service-item__price">
+            <span class="price-old">399 €</span>
+            À partir de<br/><strong>199 €</strong>
+            <span class="price-badge">-50%</span>
+          </div>
+          <a href="#devis" class="service-item__cta">Obtenir un devis →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PROCESS
+  ══════════════════════════════════════ -->
+  <section class="section process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// 02 — Processus</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Comment ça</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">fonctionne</span></span>
+        </h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card reveal-fade" style="--d:0s">
+          <div class="process-card__num font-mono">01</div>
+          <h3>Vous décrivez votre projet</h3>
+          <p>Remplissez le formulaire de devis en moins de 3 minutes. Secteur, type de site, fonctionnalités souhaitées.</p>
+        </div>
+        <div class="process-card reveal-fade" style="--d:.1s">
+          <div class="process-card__num font-mono">02</div>
+          <h3>Nous vous envoyons un devis</h3>
+          <p>Vous recevez un devis détaillé avec le tarif et les livrables. Gratuit, sans engagement.</p>
+        </div>
+        <div class="process-card reveal-fade" style="--d:.2s">
+          <div class="process-card__num font-mono">03</div>
+          <h3>On conçoit ensemble</h3>
+          <p>L'IA et notre expertise créent votre site rapidement. Vous validez chaque étape clé du projet.</p>
+        </div>
+        <div class="process-card reveal-fade" style="--d:.3s">
+          <div class="process-card__num font-mono">04</div>
+          <h3>Mise en ligne & support</h3>
+          <p>Votre site est déployé. Nous restons disponibles pour les évolutions, correctifs et questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PORTFOLIO
+  ══════════════════════════════════════ -->
+  <section class="section portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// 03 — Réalisations</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Quelques</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">projets réalisés</span></span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="portfolio-list">
+
+      <!-- 1 — Cabinet Juridique -->
+      <div class="portfolio-item reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/cabinet-moreau/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/cabinet-moreau.jpg" alt="Cabinet Juridique Moreau" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Site Vitrine · Droit</span>
+            <h3>Cabinet Juridique Moreau</h3>
+            <p>Design sobre et autorité pour un cabinet d'avocats parisien. Blog juridique, formulaire de contact intelligent, SEO local optimisé.</p>
+            <div class="pf-tags"><span>Vitrine</span><span>Blog</span><span>SEO local</span></div>
+          </div>
+          <a href="projects/cabinet-moreau/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 2 — E-commerce Mode -->
+      <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/elara-paris/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/elara-paris.jpg" alt="Élara Paris" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">E-commerce · Mode</span>
+            <h3>Élara Paris</h3>
+            <p>Boutique de prêt-à-porter haut de gamme. Fiches produits enrichies, filtres avancés, panier persistant, programme fidélité.</p>
+            <div class="pf-tags"><span>Stripe</span><span>Wishlist</span><span>Multi-devises</span></div>
+          </div>
+          <a href="projects/elara-paris/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 3 — Restaurant -->
+      <div class="portfolio-item reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/le-clos-vert/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/le-clos-vert.jpg" alt="Le Clos Vert" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Site Vitrine · Restauration</span>
+            <h3>Le Clos Vert</h3>
+            <p>Site gastronomique élégant avec réservation en ligne, galerie photos, menu PDF dynamique et intégration Google Maps.</p>
+            <div class="pf-tags"><span>Réservation</span><span>Galerie</span><span>Menu PDF</span></div>
+          </div>
+          <a href="projects/le-clos-vert/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 4 — Immobilier -->
+      <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/nexthome-realty/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/nexthome-realty.jpg" alt="Nexthome Realty" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Site Web · Immobilier</span>
+            <h3>Nexthome Realty</h3>
+            <p>Plateforme immobilière avec carte interactive, filtres de recherche avancés, estimation IA et espace agent sécurisé.</p>
+            <div class="pf-tags"><span>Carte interactive</span><span>IA estimation</span><span>Dashboard agent</span></div>
+          </div>
+          <a href="projects/nexthome-realty/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 5 — Coach Sportif -->
+      <div class="portfolio-item reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/fitcoach-pro/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/fitcoach-pro.jpg" alt="FitCoach Pro" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Landing Page · Sport &amp; Bien-être</span>
+            <h3>FitCoach Pro</h3>
+            <p>Landing page haute conversion pour un coach personnel. Programme en ligne, témoignages vidéo, tunnel d'inscription et paiement mensuel.</p>
+            <div class="pf-tags"><span>Abonnement</span><span>Vidéos</span><span>Calendly</span></div>
+          </div>
+          <a href="projects/fitcoach-pro/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 6 — SaaS Dashboard -->
+      <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/taskflow-analytics/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/taskflow-analytics.jpg" alt="TaskFlow Analytics" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Site Web · SaaS</span>
+            <h3>TaskFlow Analytics</h3>
+            <p>Dashboard de gestion de projets et d'analytics en temps réel. Rôles utilisateurs, exports CSV, notifications email et API REST.</p>
+            <div class="pf-tags"><span>Dashboard</span><span>API REST</span><span>Multi-rôles</span></div>
+          </div>
+          <a href="projects/taskflow-analytics/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 7 — Photographe Portfolio -->
+      <div class="portfolio-item reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/camille-roux/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/camille-roux.jpg" alt="Camille Roux Photography" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Portfolio · Photographie</span>
+            <h3>Camille Roux Photography</h3>
+            <p>Portfolio immersif plein écran avec galerie masonry animée, lightbox haute résolution, formulaire de booking et boutique prints.</p>
+            <div class="pf-tags"><span>Masonry</span><span>Lightbox</span><span>Booking</span></div>
+          </div>
+          <a href="projects/camille-roux/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+      <!-- 8 — Formation en ligne -->
+      <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
+        <div class="portfolio-item__thumb">
+          <a href="projects/skillup-academy/" target="_blank" class="pf-screenshot-link">
+            <img src="assets/screenshots/skillup-academy.jpg" alt="SkillUp Academy" class="pf-screenshot"/>
+            <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
+          </a>
+        </div>
+        <div class="portfolio-item__info">
+          <div>
+            <span class="font-mono c-blue portfolio-item__type">Plateforme · E-learning</span>
+            <h3>SkillUp Academy</h3>
+            <p>Plateforme de formation en ligne avec lecteur vidéo, quiz interactifs, certificats automatiques et espace étudiant personnalisé.</p>
+            <div class="pf-tags"><span>Vidéos</span><span>Quiz</span><span>Certificats</span></div>
+          </div>
+          <a href="projects/skillup-academy/" target="_blank" class="portfolio-item__link">Voir le site →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MARQUEE 2 -->
+  <div class="marquee marquee--reverse" aria-hidden="true">
+    <div class="marquee__track">
+      <span>"Résultat bluffant, je recommande !"</span><span class="c-blue">✦</span>
+      <span>"Livré rapidement, très professionnel"</span><span class="c-blue">✦</span>
+      <span>"Site moderne et efficace"</span><span class="c-blue">✦</span>
+      <span>"Devis clair et transparent"</span><span class="c-blue">✦</span>
+      <span>"Excellent rapport qualité/prix"</span><span class="c-blue">✦</span>
+      <span>"À l'écoute et réactif"</span><span class="c-blue">✦</span>
+      <span>"Résultat bluffant, je recommande !"</span><span class="c-blue">✦</span>
+      <span>"Livré rapidement, très professionnel"</span><span class="c-blue">✦</span>
+      <span>"Site moderne et efficace"</span><span class="c-blue">✦</span>
+      <span>"Devis clair et transparent"</span><span class="c-blue">✦</span>
+      <span>"Excellent rapport qualité/prix"</span><span class="c-blue">✦</span>
+      <span>"À l'écoute et réactif"</span><span class="c-blue">✦</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       À PROPOS
+  ══════════════════════════════════════ -->
+  <section class="section apropos" id="apropos">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// À propos</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Qui sommes</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">nous ?</span></span>
+        </h2>
+      </div>
+      <div class="apropos-layout">
+        <div class="apropos-intro reveal-fade" style="--d:.1s">
+          <p>Passionnés par le web et les nouvelles technologies, nous avons lancé cette entreprise avec une idée simple : rendre la création de sites internet plus accessible, sans sacrifier la qualité ni la personnalisation. Grâce à l'intelligence artificielle, nous concevons des sites modernes, performants et adaptés à chaque projet, tout en réduisant considérablement les coûts de développement.</p>
+          <p>Nous travaillons main dans la main avec l'IA pour optimiser chaque étape de création : design, structure, contenu et expérience utilisateur. Cette approche nous permet de proposer des solutions rapides, efficaces et pensées pour répondre aux besoins de chacun.</p>
+          <p>Notre objectif est de créer une relation de proximité avec nos clients, en offrant un accompagnement humain, sérieux et transparent, pour donner vie à des sites web uniques et accessibles à tous.</p>
+        </div>
+        <div class="apropos-values reveal-fade" style="--d:.2s">
+          <div class="value-card">
+            <span class="value-card__icon font-mono c-blue">01</span>
+            <h3>Sur-mesure</h3>
+            <p>Chaque site est conçu spécifiquement pour votre activité, vos clients et vos objectifs. Pas de templates génériques.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon font-mono c-blue">02</span>
+            <h3>Propulsé par l'IA</h3>
+            <p>L'intelligence artificielle nous permet de travailler plus vite et plus intelligemment, sans jamais sacrifier la qualité.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon font-mono c-blue">03</span>
+            <h3>Prix transparents</h3>
+            <p>Devis clair dès le départ, pas de mauvaises surprises. Vous savez exactement ce pour quoi vous payez.</p>
+          </div>
+          <div class="value-card">
+            <span class="value-card__icon font-mono c-blue">04</span>
+            <h3>Support réactif</h3>
+            <p>Nous restons disponibles bien après la mise en ligne. Votre satisfaction sur le long terme est notre priorité.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FAQ
+  ══════════════════════════════════════ -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// Questions fréquentes</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Vos questions,</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">nos réponses</span></span>
+        </h2>
+      </div>
+      <div class="faq-list reveal-fade" style="--d:.1s">
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Combien de temps faut-il pour créer mon site ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Le délai dépend de la complexité de votre projet. Un site vitrine prend généralement 1 à 2 semaines, un e-commerce ou un site plus complexe peut nécessiter 3 à 5 semaines. Tout commence dès la réception de l'acompte et des contenus nécessaires.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Comment se passe le paiement ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Nous fonctionnons en deux temps : 50 % à la commande pour démarrer les travaux, et 50 % à la livraison, avant mise en ligne. Le paiement s'effectue par virement bancaire ou carte via Stripe.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Est-ce que je pourrai modifier mon site moi-même ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Oui, si vous le souhaitez. Selon vos besoins, nous pouvons intégrer un CMS (système de gestion de contenu) comme WordPress ou un éditeur no-code pour que vous puissiez mettre à jour vos textes et images en toute autonomie.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Mon site sera-t-il bien référencé sur Google ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Tous nos sites sont livrés avec les bases du SEO technique : balises méta, structure sémantique, vitesse optimisée et compatibilité mobile. Pour un référencement avancé (rédaction de contenus, backlinks, SEO local), nous pouvons vous accompagner sur devis.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Que se passe-t-il après la mise en ligne ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Nous assurons une garantie de 30 jours après la mise en ligne pour corriger tout bug lié à notre réalisation. Au-delà, des contrats de maintenance sont disponibles pour les mises à jour, sauvegardes et évolutions de votre site.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Travaillez-vous avec des clients hors de France ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Absolument ! Nous travaillons avec des clients partout en Europe et dans le monde. Tous nos échanges se font à distance (visio, email, messagerie) et nos outils permettent une collaboration fluide quelle que soit la localisation.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            <span>Quelle différence avec Wix ou Squarespace ?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Les constructeurs no-code sont pratiques mais limités : design générique, abonnements mensuels à vie, performances réduites et peu de flexibilité. Nous créons des sites sur-mesure que vous possédez entièrement, sans frais récurrents imposés, optimisés pour vos performances et votre image de marque.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       DEVIS
+  ══════════════════════════════════════ -->
+  <section class="section devis" id="devis">
+    <div class="container">
+      <div class="section-header">
+        <span class="font-mono c-blue section-tag reveal-fade" style="--d:0s">// 04 — Devis gratuit</span>
+        <h2 class="section-title">
+          <span class="line-wrap reveal-clip" style="--d:.05s"><span>Parlons de</span></span>
+          <span class="line-wrap reveal-clip" style="--d:.15s"><span class="c-blue">votre projet</span></span>
+        </h2>
+      </div>
+
+      <div class="devis-layout">
+        <div class="devis-aside reveal-fade" style="--d:.1s">
+          <p>Remplissez le formulaire et nous vous contactons avec un devis complet. Gratuit, sans engagement.</p>
+          <div class="devis-guarantees">
+            <div class="guarantee">
+              <span class="font-mono c-blue">01</span>
+              <p>Réponse rapide garantie</p>
+            </div>
+            <div class="guarantee">
+              <span class="font-mono c-blue">02</span>
+              <p>Données confidentielles & sécurisées</p>
+            </div>
+            <div class="guarantee">
+              <span class="font-mono c-blue">03</span>
+              <p>Aucun engagement de votre part</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="devis-form reveal-fade" style="--d:.2s" id="devisForm" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="prenom">Prénom *</label>
+              <input type="text" id="prenom" name="prenom" placeholder="Jean" required />
+            </div>
+            <div class="form-field">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" name="nom" placeholder="Dupont" required />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="jean@email.com" required />
+          </div>
+          <div class="form-field">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="+33 6 00 00 00 00" />
+          </div>
+          <div class="form-field">
+            <label for="type">Type de site *</label>
+            <select id="type" name="type" required>
+              <option value="" disabled selected>Choisissez...</option>
+              <option value="vitrine">Site Vitrine</option>
+              <option value="ecommerce">E-commerce</option>
+              <option value="landing">Landing Page</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="description">Décrivez votre projet *</label>
+            <textarea id="description" name="description" rows="5" placeholder="Parlez-nous de votre activité, de vos objectifs, des fonctionnalités souhaitées..." required></textarea>
+          </div>
+          <div class="form-field form-field--check">
+            <label class="check-label">
+              <input type="checkbox" id="rgpd" name="rgpd" required />
+              <span>J'accepte que mes données soient traitées pour répondre à ma demande, conformément à la <a href="politique-confidentialite.html" target="_blank" class="c-blue">politique de confidentialité</a>. *</span>
+            </label>
+          </div>
+          <button type="submit" class="btn-submit">
+            <span>Envoyer ma demande</span>
+            <div class="btn-submit__icon">→</div>
+          </button>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success__icon">✓</div>
+            <h3>Demande envoyée !</h3>
+            <p>Nous vous contactons rapidement avec un devis détaillé.</p>
+            <a href="client/" class="form-success__cta">Créer un compte pour suivre votre projet →</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo font-mono">
+          <span class="c-blue">&lt;</span>[NOM]<span class="c-blue">/&gt;</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="#services">Services</a>
+          <a href="#process">Processus</a>
+          <a href="#portfolio">Réalisations</a>
+          <a href="#devis">Devis</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span class="font-mono">© 2025 [NOM]</span>
+        <div class="footer-legal">
+          <a href="cgv.html" class="font-mono">CGV</a>
+          <a href="mentions-legales.html" class="font-mono">Mentions légales</a>
+          <a href="politique-confidentialite.html" class="font-mono">Confidentialité</a>
+        </div>
+        <span class="font-mono c-blue">Fait avec IA & passion</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Retour en haut">↑</button>
+
+  <!-- CHATBOT -->
+  <div class="chatbot" id="chatbot">
+
+    <!-- Bulle de teasing -->
+    <div class="chatbot__bubble" id="chatbotBubble">
+      Une question ? Je suis là 👋
+      <button class="chatbot__bubble-close" id="chatbotBubbleClose" aria-label="Fermer">✕</button>
+    </div>
+
+    <button class="chatbot__toggle" id="chatbotToggle" aria-label="Cosmo, guide IA">
+      <span class="chatbot__pulse"></span>
+      <svg class="chatbot__icon-open" width="30" height="30" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- helmet -->
+        <circle cx="30" cy="28" r="18" fill="#0a1628" stroke="#00bfff" stroke-width="1.5"/>
+        <!-- visor -->
+        <ellipse cx="30" cy="28" rx="13" ry="11" fill="#001f3f" stroke="#00bfff" stroke-width="1"/>
+        <!-- eyes -->
+        <circle cx="24" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+        <circle cx="36" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+        <circle cx="24" cy="27" r="1.4" fill="#fff"/>
+        <circle cx="36" cy="27" r="1.4" fill="#fff"/>
+        <!-- smile -->
+        <path d="M24 34 Q30 38 36 34" stroke="#00bfff" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <!-- antenna -->
+        <line x1="30" y1="10" x2="30" y2="6" stroke="#00bfff" stroke-width="1.5"/>
+        <circle cx="30" cy="5" r="2" fill="#00bfff"/>
+        <!-- suit collar -->
+        <path d="M14 42 Q30 48 46 42" stroke="#00bfff" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <rect x="22" y="41" width="16" height="8" rx="3" fill="#0a1628" stroke="#00bfff" stroke-width="1"/>
+      </svg>
+      <svg class="chatbot__icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="chatbot__panel" id="chatbotPanel">
+
+      <!-- Header -->
+      <div class="chatbot__header">
+        <div class="chatbot__avatar">
+          <svg width="36" height="36" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="28" r="18" fill="#0a1628" stroke="#00bfff" stroke-width="1.5"/>
+            <ellipse cx="30" cy="28" rx="13" ry="11" fill="#001f3f" stroke="#00bfff" stroke-width="1"/>
+            <circle cx="24" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+            <circle cx="36" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+            <circle cx="24" cy="27" r="1.4" fill="#fff"/>
+            <circle cx="36" cy="27" r="1.4" fill="#fff"/>
+            <path d="M24 34 Q30 38 36 34" stroke="#00bfff" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            <line x1="30" y1="10" x2="30" y2="6" stroke="#00bfff" stroke-width="1.5"/>
+            <circle cx="30" cy="5" r="2" fill="#00bfff"/>
+            <path d="M14 42 Q30 48 46 42" stroke="#00bfff" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            <rect x="22" y="41" width="16" height="8" rx="3" fill="#0a1628" stroke="#00bfff" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="chatbot__header-info">
+          <div class="chatbot__name font-mono">Cosmo, guide IA</div>
+          <div class="chatbot__status"><span class="chatbot__dot"></span>En ligne · répond instantanément</div>
+        </div>
+        <div class="chatbot__header-actions">
+          <button class="chatbot__header-btn" id="chatbotMinimize" aria-label="Réduire">−</button>
+          <button class="chatbot__header-btn" id="chatbotClose" aria-label="Fermer">✕</button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="chatbot__messages" id="chatbotMessages">
+        <div class="chatbot__msg chatbot__msg--bot">
+          <div class="chatbot__msg-avatar">
+            <svg width="22" height="22" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="28" r="18" fill="#0a1628" stroke="#00bfff" stroke-width="1.5"/>
+              <ellipse cx="30" cy="28" rx="13" ry="11" fill="#001f3f" stroke="#00bfff" stroke-width="1"/>
+              <circle cx="24" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+              <circle cx="36" cy="27" r="3.2" fill="#00bfff" opacity=".9"/>
+              <circle cx="24" cy="27" r="1.4" fill="#fff"/>
+              <circle cx="36" cy="27" r="1.4" fill="#fff"/>
+              <path d="M24 34 Q30 38 36 34" stroke="#00bfff" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+              <line x1="30" y1="10" x2="30" y2="6" stroke="#00bfff" stroke-width="1.5"/>
+              <circle cx="30" cy="5" r="2" fill="#00bfff"/>
+              <rect x="22" y="41" width="16" height="8" rx="3" fill="#0a1628" stroke="#00bfff" stroke-width="1"/>
+            </svg>
+          </div>
+          <p>Bonjour ! Un site web sur-mesure, c'est possible ?</p>
+        </div>
+        <!-- Questions suggérées -->
+        <div class="chatbot__suggestions" id="chatbotSuggestions">
+          <button class="chatbot__chip">💰 Quels sont vos tarifs ?</button>
+          <button class="chatbot__chip">⏱ Quels sont vos délais ?</button>
+          <button class="chatbot__chip">🔧 Comment ça fonctionne ?</button>
+          <button class="chatbot__chip">📞 Comment vous contacter ?</button>
+        </div>
+      </div>
+
+      <!-- Footer / input -->
+      <div class="chatbot__footer">
+        <div class="chatbot__input-wrap">
+          <input type="text" class="chatbot__input" id="chatbotInput" placeholder="Posez votre question..." maxlength="500" />
+          <button class="chatbot__send" id="chatbotSend" aria-label="Envoyer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+        <p class="chatbot__disclaimer font-mono">Propulsé par Claude IA · Anthropic</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

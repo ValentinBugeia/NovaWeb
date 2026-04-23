@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**",
+      "screenshot.js",
+      "package*.json"
+    ],
+    "rewrites": [
+      { "source": "/api/chat", "function": "chat" }
+    ]
+  },
+  "functions": {
+    "source": "functions"
+  }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FitCoach Pro — Coaching Sportif Personnel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0a0a;--orange:#f97316;--orange-dim:rgba(249,115,22,.1);--white:#f5f5f5;--gray:#6b7280;--border:rgba(249,115,22,.15)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white)}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1140px;margin:0 auto;padding:0 32px}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:68px;display:flex;align-items:center}
+    .nav-inner{width:100%;max-width:1140px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:3px;color:var(--white)}
+    .nav-logo span{color:var(--orange)}
+    .nav-links{display:flex;gap:32px}
+    .nav-links a{font-size:.82rem;font-weight:500;color:var(--gray);letter-spacing:.5px;transition:color .25s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-cta{background:var(--orange);color:var(--white);padding:10px 24px;font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:4px;transition:background .25s}
+    .nav-cta:hover{background:#ea6c0a}
+
+    /* HERO */
+    .hero{min-height:100vh;padding-top:68px;display:grid;grid-template-columns:1fr 1fr;background:var(--bg);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 50%,rgba(249,115,22,.08),transparent 60%)}
+    .hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 60px;position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--orange-dim);border:1px solid var(--border);border-radius:4px;padding:6px 14px;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:24px;width:fit-content}
+    .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,6vw,6rem);line-height:.95;letter-spacing:2px;margin-bottom:24px}
+    .hero h1 span{color:var(--orange);display:block}
+    .hero p{font-size:1rem;color:var(--gray);line-height:1.7;margin-bottom:40px;max-width:400px}
+    .hero-btns{display:flex;gap:12px;margin-bottom:48px}
+    .btn-orange{background:var(--orange);color:var(--white);padding:16px 36px;font-weight:700;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;border-radius:4px;transition:background .25s;border:none;cursor:pointer}
+    .btn-orange:hover{background:#ea6c0a}
+    .btn-ghost{border:1px solid rgba(255,255,255,.2);color:var(--white);padding:16px 36px;font-size:.9rem;border-radius:4px;transition:border-color .25s}
+    .btn-ghost:hover{border-color:var(--orange)}
+    .hero-social{font-size:.78rem;color:var(--gray)}
+    .hero-social strong{color:var(--orange)}
+    .hero-right{display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,rgba(249,115,22,.05),transparent)}
+    .stats-card{display:flex;flex-direction:column;gap:16px;width:320px}
+    .stat-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:20px}
+    .stat-icon{width:48px;height:48px;background:var(--orange-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .stat-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);line-height:1}
+    .stat-card p{font-size:.75rem;color:var(--gray)}
+
+    /* PROGRAMS */
+    .programs{padding:100px 0}
+    .section-tag{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);display:block;margin-bottom:12px}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4rem);letter-spacing:2px;margin-bottom:48px}
+    .programs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .program-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:32px;transition:border-color .3s,background .3s}
+    .program-card:hover{border-color:var(--orange);background:var(--orange-dim)}
+    .program-card--featured{border-color:var(--orange);background:var(--orange-dim);position:relative}
+    .program-card--featured::before{content:'POPULAIRE';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:2px;padding:4px 14px;border-radius:100px}
+    .program-icon{font-size:2rem;margin-bottom:20px}
+    .program-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+    .program-card p{font-size:.85rem;color:var(--gray);line-height:1.6;margin-bottom:24px}
+    .program-features{display:flex;flex-direction:column;gap:8px;margin-bottom:28px}
+    .program-features li{font-size:.82rem;color:var(--gray);display:flex;gap:8px;align-items:flex-start}
+    .program-features li::before{content:'✓';color:var(--orange);flex-shrink:0;font-weight:700}
+    .program-price{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--white);margin-bottom:16px}
+    .program-price span{font-size:1rem;color:var(--gray);font-family:'Inter',sans-serif}
+    .program-cta{display:block;text-align:center;background:var(--orange);color:var(--white);padding:12px;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;border-radius:6px;transition:background .25s}
+    .program-cta:hover{background:#ea6c0a}
+
+    /* TRANSFORMATIONS */
+    .transforms{padding:100px 0;background:rgba(255,255,255,.02)}
+    .transforms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+    .transform-item{position:relative;overflow:hidden}
+    .transform-img{height:320px;display:flex}
+    .transform-before,.transform-after{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:16px;position:relative}
+    .transform-before{background:linear-gradient(to top,rgba(10,10,10,.8),transparent 60%),linear-gradient(135deg,#1a1a1a,#2a2a2a)}
+    .transform-after{background:linear-gradient(to top,rgba(249,115,22,.6),transparent 60%),linear-gradient(135deg,#2a1500,#3d2000)}
+    .transform-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+    .transform-divider{width:2px;background:var(--orange);position:relative;z-index:1}
+    .transform-divider::before{content:'↔';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem}
+    .transform-stats{padding:16px;background:rgba(255,255,255,.04);text-align:center}
+    .transform-stats strong{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--orange)}
+    .transform-stats p{font-size:.72rem;color:var(--gray)}
+
+    /* FOOTER */
+    footer{background:#060606;border-top:1px solid var(--border);padding:48px 0 24px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+    .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--white)}
+    .footer-logo span{color:var(--orange)}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{font-size:.78rem;color:var(--gray);transition:color .25s}
+    .footer-links a:hover{color:var(--orange)}
+    .footer-copy{width:100%;text-align:center;padding-top:24px;border-top:1px solid var(--border);margin-top:24px;font-size:.75rem;color:rgba(255,255,255,.3)}
+
+    @media(max-width:768px){.hero{grid-template-columns:1fr}.hero-left{padding:60px 20px}.hero-right{padding:40px 20px}.programs-grid{grid-template-columns:1fr}.transforms-grid{grid-template-columns:1fr}.container{padding:0 20px}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">FIT<span>COACH</span> PRO</div>
+    <ul class="nav-links">
+      <li><a href="#programs">Programmes</a></li>
+      <li><a href="#transforms">Résultats</a></li>
+      <li><a href="#">À propos</a></li>
+    </ul>
+    <a href="#programs" class="nav-cta">Commencer maintenant</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">⚡ Coaching en ligne & présentiel</div>
+    <h1>TRANSFORMEZ<br/><span>VOTRE CORPS</span><br/>EN 90 JOURS</h1>
+    <p>Des programmes personnalisés, un suivi rigoureux et une méthode prouvée pour atteindre vos objectifs — quels qu'ils soient.</p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-orange">Voir les programmes</a>
+      <a href="#" class="btn-ghost">Consultation gratuite</a>
+    </div>
+    <p class="hero-social"><strong>+1 200</strong> membres actifs · <strong>4.9★</strong> sur Trustpilot</p>
+  </div>
+  <div class="hero-right">
+    <div class="stats-card">
+      <div class="stat-card"><div class="stat-icon">🏋️</div><div><h3>90J</h3><p>Programme transformation</p></div></div>
+      <div class="stat-card"><div class="stat-icon">🔥</div><div><h3>−12KG</h3><p>Résultat moyen en 3 mois</p></div></div>
+      <div class="stat-card"><div class="stat-icon">📱</div><div><h3>24/7</h3><p>Suivi & accompagnement</p></div></div>
+      <div class="stat-card"><div class="stat-icon">⭐</div><div><h3>98%</h3><p>Clients atteignent leurs objectifs</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="programs" id="programs">
+  <div class="container">
+    <span class="section-tag">Programmes</span>
+    <h2 class="section-title">Choisissez votre plan</h2>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-icon">🌱</div>
+        <h3>Starter</h3>
+        <p>Idéal pour débuter et prendre de bonnes habitudes alimentaires et sportives.</p>
+        <ul class="program-features">
+          <li>Plan d'entraînement personnalisé</li>
+          <li>Suivi nutritionnel de base</li>
+          <li>Accès app mobile</li>
+          <li>Support email 48h</li>
+        </ul>
+        <div class="program-price">49 € <span>/ mois</span></div>
+        <a href="#" class="program-cta">Commencer</a>
+      </div>
+      <div class="program-card program-card--featured">
+        <div class="program-icon">⚡</div>
+        <h3>Performance</h3>
+        <p>Le programme complet pour des résultats rapides et durables.</p>
+        <ul class="program-features">
+          <li>Programme 100% sur-mesure</li>
+          <li>Suivi nutritionnel avancé</li>
+          <li>2 appels vidéo / mois</li>
+          <li>Support WhatsApp 24/7</li>
+          <li>Accès communauté privée</li>
+        </ul>
+        <div class="program-price">129 € <span>/ mois</span></div>
+        <a href="#" class="program-cta">Commencer</a>
+      </div>
+      <div class="program-card">
+        <div class="program-icon">👑</div>
+        <h3>Elite</h3>
+        <p>Pour ceux qui visent l'excellence. Coaching 1-to-1 intensif.</p>
+        <ul class="program-features">
+          <li>Coaching 100% individualisé</li>
+          <li>Appels illimités</li>
+          <li>Séances en présentiel (Paris)</li>
+          <li>Bilan sanguin & médical</li>
+          <li>Accès à vie aux ressources</li>
+        </ul>
+        <div class="program-price">299 € <span>/ mois</span></div>
+        <a href="#" class="program-cta">Commencer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="transforms" id="transforms">
+  <div class="container">
+    <span class="section-tag">Résultats réels</span>
+    <h2 class="section-title">Avant / Après</h2>
+  </div>
+  <div class="transforms-grid">
+    <div class="transform-item">
+      <div class="transform-img">
+        <div class="transform-before"><span class="transform-label">Avant</span></div>
+        <div class="transform-divider"></div>
+        <div class="transform-after"><span class="transform-label">Après</span></div>
+      </div>
+      <div class="transform-stats"><strong>−14 KG</strong><p>Thomas, 34 ans — 3 mois</p></div>
+    </div>
+    <div class="transform-item">
+      <div class="transform-img">
+        <div class="transform-before"><span class="transform-label">Avant</span></div>
+        <div class="transform-divider"></div>
+        <div class="transform-after"><span class="transform-label">Après</span></div>
+      </div>
+      <div class="transform-stats"><strong>+8 KG muscle</strong><p>Lucie, 28 ans — 6 mois</p></div>
+    </div>
+    <div class="transform-item">
+      <div class="transform-img">
+        <div class="transform-before"><span class="transform-label">Avant</span></div>
+        <div class="transform-divider"></div>
+        <div class="transform-after"><span class="transform-label">Après</span></div>
+      </div>
+      <div class="transform-stats"><strong>−20 KG</strong><p>Marc, 45 ans — 5 mois</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">FIT<span>COACH</span> PRO</div>
+      <div class="footer-links">
+        <a href="#">Programmes</a><a href="#">Résultats</a><a href="#">Contact</a><a href="#">CGV</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 FitCoach Pro — Coaching sportif personnel</div>
+  </div>
+</footer>
+
+</body>
+</html>

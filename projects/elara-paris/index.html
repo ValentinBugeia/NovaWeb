@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Élara Paris — Prêt-à-porter haut de gamme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--black:#0a0a0a;--white:#fafafa;--cream:#f7f3ee;--mauve:#8b6f8e;--taupe:#c4b49a;--gray:#9ca3af;--border:rgba(0,0,0,.1)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--white);color:var(--black)}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 40px}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:70px;display:flex;align-items:center}
+    .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;letter-spacing:4px;font-weight:400}
+    .nav-logo span{color:var(--mauve)}
+    .nav-links{display:flex;gap:32px}
+    .nav-links a{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);transition:color .25s}
+    .nav-links a:hover{color:var(--black)}
+    .nav-right{display:flex;gap:20px;align-items:center}
+    .nav-right a{font-size:.78rem;letter-spacing:1px}
+    .nav-cart{font-size:1rem}
+
+    /* HERO */
+    .hero{min-height:100vh;padding-top:70px;display:grid;grid-template-columns:1fr 1fr}
+    .hero-left{background:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:80px 60px;position:relative;overflow:hidden}
+    .hero-left::before{content:'ÉLARA';position:absolute;bottom:-20px;left:-10px;font-family:'Cormorant Garamond',serif;font-size:12rem;font-weight:300;color:rgba(139,111,142,.07);line-height:1;pointer-events:none;white-space:nowrap}
+    .hero-tag{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--mauve);margin-bottom:24px}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:300;line-height:1.15;margin-bottom:24px}
+    .hero h1 em{font-style:italic;color:var(--mauve)}
+    .hero p{font-size:.9rem;color:var(--gray);line-height:1.8;margin-bottom:40px;max-width:380px}
+    .hero-btns{display:flex;gap:12px}
+    .btn-black{background:var(--black);color:var(--white);padding:14px 32px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:background .25s}
+    .btn-black:hover{background:#222}
+    .btn-nude{border:1px solid rgba(0,0,0,.3);color:var(--black);padding:14px 32px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:border-color .25s}
+    .hero-right{background:var(--mauve);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(196,180,154,.2),transparent)}
+    .hero-mannequin{width:200px;height:360px;position:relative;z-index:1}
+    .mannequin-body{width:80px;height:200px;background:rgba(255,255,255,.15);border-radius:40px 40px 20px 20px;margin:0 auto;position:relative;margin-top:60px}
+    .mannequin-head{width:50px;height:50px;background:rgba(255,255,255,.2);border-radius:50%;margin:0 auto 10px}
+    .mannequin-dress{width:120px;height:160px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px 8px 40px 40px;margin:0 auto;position:absolute;bottom:-20px;left:50%;transform:translateX(-50%)}
+    .hero-price{position:absolute;bottom:40px;right:40px;background:rgba(250,250,250,.15);backdrop-filter:blur(8px);padding:16px 20px;border:1px solid rgba(255,255,255,.2)}
+    .hero-price .price{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--white)}
+    .hero-price .label{font-size:.65rem;letter-spacing:2px;color:rgba(255,255,255,.6);margin-top:2px;text-transform:uppercase}
+
+    /* COLLECTION */
+    .collection{padding:100px 0;background:var(--white)}
+    .collection-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
+    .section-tag{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--mauve);margin-bottom:8px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300}
+    .view-all{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--black);padding-bottom:2px}
+    .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+    .product-card{cursor:pointer}
+    .product-img{aspect-ratio:3/4;position:relative;overflow:hidden;margin-bottom:16px}
+    .product-img-bg{width:100%;height:100%;transition:transform .5s}
+    .product-card:hover .product-img-bg{transform:scale(1.04)}
+    .product-img-bg--1{background:linear-gradient(135deg,#e8ddd4,#d4c4b8)}
+    .product-img-bg--2{background:linear-gradient(135deg,#2d2d3a,#1a1a25)}
+    .product-img-bg--3{background:linear-gradient(135deg,#c4b4c4,#9a889a)}
+    .product-img-bg--4{background:linear-gradient(135deg,#f0e8d8,#e0d0c0)}
+    .product-tag{position:absolute;top:12px;left:12px;background:var(--black);color:var(--white);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;padding:4px 10px}
+    .product-name{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:4px}
+    .product-price{font-size:.82rem;color:var(--gray)}
+
+    /* ABOUT */
+    .about{padding:100px 0;background:var(--black);display:grid;grid-template-columns:1fr 1fr;align-items:center}
+    .about-img{height:500px;background:linear-gradient(135deg,#1a1a25,#2d1a2d);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:6rem;color:rgba(139,111,142,.2)}
+    .about-content{padding:80px}
+    .about-content .section-tag{color:var(--mauve)}
+    .about-content h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--white);margin:12px 0 24px;line-height:1.2}
+    .about-content p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:32px}
+    .about-link{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--mauve);border-bottom:1px solid var(--mauve);padding-bottom:2px;display:inline-block}
+
+    /* NEWSLETTER */
+    .newsletter{padding:80px 0;background:var(--cream);text-align:center}
+    .newsletter h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:12px}
+    .newsletter p{font-size:.88rem;color:var(--gray);margin-bottom:32px}
+    .nl-form{display:flex;gap:0;max-width:440px;margin:0 auto}
+    .nl-form input{flex:1;padding:14px 18px;border:1px solid rgba(0,0,0,.2);border-right:none;font-family:'Inter',sans-serif;font-size:.88rem;outline:none}
+    .nl-form button{background:var(--black);color:var(--white);border:none;padding:14px 24px;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+
+    /* FOOTER */
+    footer{background:var(--black);padding:60px 0 32px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+    .footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--white);margin-bottom:12px}
+    .footer-brand p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.7}
+    .footer-col h4{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px}
+    .footer-col ul{display:flex;flex-direction:column;gap:10px}
+    .footer-col li a{font-size:.82rem;color:rgba(255,255,255,.4);transition:color .25s}
+    .footer-col li a:hover{color:var(--mauve)}
+    .footer-bottom{display:flex;justify-content:space-between;padding-top:32px;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;color:rgba(255,255,255,.3)}
+
+    @media(max-width:768px){
+      .hero{grid-template-columns:1fr}
+      .hero-right{min-height:300px}
+      .products-grid{grid-template-columns:1fr 1fr}
+      .about{grid-template-columns:1fr}
+      .about-img{height:250px}
+      .about-content{padding:48px 20px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .container{padding:0 20px}
+      .footer-bottom{flex-direction:column;gap:8px}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">ÉLARA <span>PARIS</span></div>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#about">Maison</a></li>
+      <li><a href="#newsletter">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#">Connexion</a>
+      <a href="#" class="nav-cart">🛍️</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Collection Printemps 2025</p>
+    <h1>L'élégance<br/>à l'état <em>pur</em></h1>
+    <p>Des pièces intemporelles pensées pour la femme moderne. Matières nobles, coupes précises, silhouettes affirmées.</p>
+    <div class="hero-btns">
+      <a href="#collection" class="btn-black">Découvrir la collection</a>
+      <a href="#about" class="btn-nude">Notre histoire</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mannequin">
+      <div class="mannequin-head"></div>
+      <div class="mannequin-body">
+        <div class="mannequin-dress"></div>
+      </div>
+    </div>
+    <div class="hero-price">
+      <div class="price">€ 285</div>
+      <div class="label">Robe Signature</div>
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="container">
+    <div class="collection-header">
+      <div>
+        <p class="section-tag">Nouveautés</p>
+        <h2 class="section-title">Collection capsule</h2>
+      </div>
+      <a href="#" class="view-all">Voir tout</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg product-img-bg--1"></div>
+          <div class="product-tag">Nouveau</div>
+        </div>
+        <div class="product-name">Robe Victoire</div>
+        <div class="product-price">€ 320</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg product-img-bg--2"></div>
+        </div>
+        <div class="product-name">Blazer Minuit</div>
+        <div class="product-price">€ 245</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg product-img-bg--3"></div>
+          <div class="product-tag">Exclusif</div>
+        </div>
+        <div class="product-name">Jupe Amethyste</div>
+        <div class="product-price">€ 185</div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <div class="product-img-bg product-img-bg--4"></div>
+        </div>
+        <div class="product-name">Chemise Ivoire</div>
+        <div class="product-price">€ 135</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-img">É</div>
+  <div class="about-content">
+    <p class="section-tag">Notre maison</p>
+    <h2>Un savoir-faire parisien depuis 2012</h2>
+    <p>Élara Paris est née d'une conviction : l'élégance n'a pas besoin de se crier. Chaque pièce est conçue dans nos ateliers parisiens avec des matières sélectionnées pour leur qualité et leur durabilité.</p>
+    <p>Nous travaillons avec des artisans français et européens, dans le respect de l'environnement et des personnes qui fabriquent nos vêtements.</p>
+    <a href="#" class="about-link">Notre démarche →</a>
+  </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <h2>Restez dans notre univers</h2>
+    <p>Accédez en avant-première aux nouvelles collections, ventes privées et événements exclusifs.</p>
+    <div class="nl-form">
+      <input type="email" placeholder="Votre adresse email"/>
+      <button>S'inscrire</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Élara Paris</h3>
+        <p>Prêt-à-porter haut de gamme. Livraison offerte dès 200€ d'achat. Retours gratuits sous 30 jours.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul><li><a href="#">Nouveautés</a></li><li><a href="#">Robes</a></li><li><a href="#">Vestes</a></li><li><a href="#">Accessoires</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>La maison</h4>
+        <ul><li><a href="#">Notre histoire</a></li><li><a href="#">Ateliers</a></li><li><a href="#">Engagements</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Service client</h4>
+        <ul><li><a href="#">Livraisons</a></li><li><a href="#">Retours</a></li><li><a href="#">Contact</a></li><li><a href="#">FAQ</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Élara Paris — Tous droits réservés</span>
+      <span>Fait avec passion à Paris</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

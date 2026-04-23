@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nexthome Realty — Votre agence immobilière</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#f4f4f0;--dark:#1a1a2e;--blue:#2563eb;--light-blue:#eff6ff;--white:#fff;--gray:#6b7280;--border:#e5e7eb}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark)}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 32px}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);height:68px;display:flex;align-items:center}
+    .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-0.5px}
+    .nav-logo span{color:var(--blue)}
+    .nav-links{display:flex;gap:28px}
+    .nav-links a{font-size:.85rem;color:var(--gray);font-weight:500;transition:color .25s}
+    .nav-links a:hover{color:var(--dark)}
+    .nav-right{display:flex;gap:12px;align-items:center}
+    .btn-outline{border:1px solid var(--border);padding:9px 20px;font-size:.82rem;font-weight:500;border-radius:6px;transition:border-color .25s}
+    .btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+    .btn-blue{background:var(--blue);color:var(--white);padding:9px 20px;font-size:.82rem;font-weight:600;border-radius:6px;transition:background .25s}
+    .btn-blue:hover{background:#1d4ed8}
+
+    /* HERO */
+    .hero{padding:140px 0 80px;background:var(--white)}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .hero-label{font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+    .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,4vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:24px}
+    .hero h1 span{color:var(--blue)}
+    .hero p{font-size:1rem;color:var(--gray);line-height:1.8;margin-bottom:32px}
+    .search-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px}
+    .search-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .search-field{display:flex;flex-direction:column;gap:4px}
+    .search-field label{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray)}
+    .search-field select,.search-field input{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:.85rem;outline:none;appearance:none}
+    .search-submit{background:var(--blue);color:var(--white);border:none;border-radius:8px;padding:14px;font-family:'Inter',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;width:100%;transition:background .25s}
+    .search-submit:hover{background:#1d4ed8}
+    .hero-right{position:relative}
+    .map-container{background:linear-gradient(135deg,#e8edf5,#d4dff0);border-radius:16px;height:400px;position:relative;overflow:hidden;border:1px solid var(--border)}
+    .map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.06) 1px,transparent 1px);background-size:40px 40px}
+    .map-roads{position:absolute;inset:0}
+    .map-road-h{position:absolute;height:2px;background:rgba(255,255,255,.6)}
+    .map-road-v{position:absolute;width:2px;background:rgba(255,255,255,.6)}
+    .map-pin{position:absolute;width:32px;height:32px;background:var(--blue);border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,99,235,.4)}
+    .map-pin::after{content:'€';transform:rotate(45deg);font-size:.6rem;color:var(--white);font-weight:700}
+    .map-pin--1{top:25%;left:30%}
+    .map-pin--2{top:45%;left:55%}
+    .map-pin--3{top:60%;left:25%}
+    .map-card{position:absolute;bottom:16px;right:16px;background:var(--white);border-radius:10px;padding:14px;width:180px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .map-card-img{height:80px;background:linear-gradient(135deg,#c8d8e8,#a8bcd4);border-radius:6px;margin-bottom:8px}
+    .map-card h4{font-size:.82rem;font-weight:600;margin-bottom:2px}
+    .map-card p{font-size:.72rem;color:var(--gray)}
+    .map-card .price{font-size:.9rem;font-weight:700;color:var(--blue);margin-top:4px}
+
+    /* STATS */
+    .stats{padding:48px 0;background:var(--dark)}
+    .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:32px}
+    .stat-n{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;color:var(--white)}
+    .stat-n span{color:var(--blue)}
+    .stat-l{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:4px}
+
+    /* PROPERTIES */
+    .properties{padding:100px 0}
+    .section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+    .section-tag{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:8px;font-weight:600}
+    .section-title{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.5px}
+    .view-all{font-size:.82rem;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:6px}
+    .props-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .prop-card{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
+    .prop-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+    .prop-img{height:200px;position:relative}
+    .prop-img-bg{width:100%;height:100%}
+    .prop-img-bg--1{background:linear-gradient(135deg,#c8d8f0,#a0bce0)}
+    .prop-img-bg--2{background:linear-gradient(135deg,#f0e8c8,#e0d0a0)}
+    .prop-img-bg--3{background:linear-gradient(135deg,#c8f0d8,#a0d8b8)}
+    .prop-badge{position:absolute;top:12px;left:12px;background:var(--blue);color:var(--white);font-size:.68rem;font-weight:600;letter-spacing:1px;padding:4px 10px;border-radius:4px}
+    .prop-badge--new{background:#16a34a}
+    .prop-save{position:absolute;top:12px;right:12px;width:32px;height:32px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;cursor:pointer}
+    .prop-body{padding:20px}
+    .prop-price{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+    .prop-name{font-size:.9rem;font-weight:600;margin-bottom:4px}
+    .prop-loc{font-size:.8rem;color:var(--gray);margin-bottom:14px}
+    .prop-features{display:flex;gap:16px;padding-top:14px;border-top:1px solid var(--border)}
+    .prop-feat{font-size:.75rem;color:var(--gray);display:flex;align-items:center;gap:4px}
+
+    /* AGENTS */
+    .agents{padding:100px 0;background:var(--dark)}
+    .agents .section-title{color:var(--white)}
+    .agents .section-tag{color:var(--blue)}
+    .agents-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+    .agent-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:24px;text-align:center;transition:background .3s}
+    .agent-card:hover{background:rgba(37,99,235,.1)}
+    .agent-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(37,99,235,.4),rgba(37,99,235,.1));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--blue);margin:0 auto 16px}
+    .agent-card h3{font-size:.92rem;font-weight:600;color:var(--white);margin-bottom:4px}
+    .agent-card p{font-size:.75rem;color:rgba(255,255,255,.4)}
+    .agent-stats{display:flex;gap:16px;justify-content:center;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+    .agent-stat{font-size:.72rem;color:rgba(255,255,255,.5);text-align:center}
+    .agent-stat strong{display:block;color:var(--blue);font-family:'Syne',sans-serif;font-size:.9rem}
+
+    /* FOOTER */
+    footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.08);padding:60px 0 32px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+    .footer-brand{color:var(--white)}
+    .footer-brand h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:12px}
+    .footer-brand span{color:var(--blue)}
+    .footer-brand p{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.7}
+    .footer-col h4{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+    .footer-col ul{display:flex;flex-direction:column;gap:10px}
+    .footer-col a{font-size:.82rem;color:rgba(255,255,255,.5);transition:color .25s}
+    .footer-col a:hover{color:var(--blue)}
+    .footer-bottom{padding-top:32px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.3)}
+
+    @media(max-width:1024px){.agents-grid{grid-template-columns:1fr 1fr}.props-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){.hero-inner{grid-template-columns:1fr}.search-row{grid-template-columns:1fr}.stats-inner{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{flex-direction:column;gap:8px}.container{padding:0 20px}.nav-links{display:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">NEXT<span>HOME</span> REALTY</div>
+    <ul class="nav-links">
+      <li><a href="#properties">Biens</a></li>
+      <li><a href="#agents">Agents</a></li>
+      <li><a href="#">Estimation</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#" class="btn-outline">Connexion</a>
+      <a href="#" class="btn-blue">Déposer une annonce</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-label">N°1 en Île-de-France</p>
+        <h1>Trouvez le bien <span>idéal</span> pour votre projet</h1>
+        <p>Achat, vente ou location — notre réseau de 50+ agents vous accompagne dans toutes vos démarches immobilières.</p>
+        <div class="search-box">
+          <div class="search-row">
+            <div class="search-field"><label>Type</label><select><option>Appartement</option><option>Maison</option><option>Studio</option><option>Commerce</option></select></div>
+            <div class="search-field"><label>Ville</label><input type="text" placeholder="Paris, Lyon..."/></div>
+            <div class="search-field"><label>Budget max</label><select><option>200 000 €</option><option>400 000 €</option><option>600 000 €</option><option>1 000 000 €</option></select></div>
+          </div>
+          <button class="search-submit">🔍 Rechercher des biens</button>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="map-container">
+          <div class="map-grid"></div>
+          <div style="position:absolute;top:35%;left:10%;right:10%;height:2px;background:rgba(255,255,255,.5)"></div>
+          <div style="position:absolute;top:60%;left:10%;right:30%;height:2px;background:rgba(255,255,255,.4)"></div>
+          <div style="position:absolute;left:40%;top:10%;bottom:10%;width:2px;background:rgba(255,255,255,.4)"></div>
+          <div class="map-pin map-pin--1"></div>
+          <div class="map-pin map-pin--2"></div>
+          <div class="map-pin map-pin--3"></div>
+          <div class="map-card">
+            <div class="map-card-img"></div>
+            <h4>3P — Marais</h4>
+            <p>75 m² · 3e étage</p>
+            <div class="price">680 000 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="container">
+    <div class="stats-inner">
+      <div><div class="stat-n">2<span>400+</span></div><div class="stat-l">Biens disponibles</div></div>
+      <div><div class="stat-n"><span>50+</span></div><div class="stat-l">Agents certifiés</div></div>
+      <div><div class="stat-n"><span>98%</span></div><div class="stat-l">Clients satisfaits</div></div>
+      <div><div class="stat-n"><span>15</span>ans</div><div class="stat-l">D'expertise</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="properties" id="properties">
+  <div class="container">
+    <div class="section-header">
+      <div><span class="section-tag">Sélection</span><h2 class="section-title">Biens en vedette</h2></div>
+      <a href="#" class="view-all">Voir tout →</a>
+    </div>
+    <div class="props-grid">
+      <div class="prop-card">
+        <div class="prop-img"><div class="prop-img-bg prop-img-bg--1"></div><div class="prop-badge prop-badge--new">Nouveau</div><div class="prop-save">🤍</div></div>
+        <div class="prop-body">
+          <div class="prop-price">680 000 €</div>
+          <div class="prop-name">Appartement Haussmannien</div>
+          <div class="prop-loc">📍 Paris 3e — Le Marais</div>
+          <div class="prop-features">
+            <div class="prop-feat">🛏 3 ch.</div>
+            <div class="prop-feat">🚿 2 sdb</div>
+            <div class="prop-feat">📐 75 m²</div>
+          </div>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><div class="prop-img-bg prop-img-bg--2"></div><div class="prop-badge">Exclusif</div><div class="prop-save">🤍</div></div>
+        <div class="prop-body">
+          <div class="prop-price">1 250 000 €</div>
+          <div class="prop-name">Maison de Caractère</div>
+          <div class="prop-loc">📍 Versailles — Centre-ville</div>
+          <div class="prop-features">
+            <div class="prop-feat">🛏 5 ch.</div>
+            <div class="prop-feat">🚿 3 sdb</div>
+            <div class="prop-feat">📐 180 m²</div>
+          </div>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-img"><div class="prop-img-bg prop-img-bg--3"></div><div class="prop-badge">Coup de cœur</div><div class="prop-save">🤍</div></div>
+        <div class="prop-body">
+          <div class="prop-price">320 000 €</div>
+          <div class="prop-name">Studio Rénové</div>
+          <div class="prop-loc">📍 Lyon 6e — Foch</div>
+          <div class="prop-features">
+            <div class="prop-feat">🛏 1 ch.</div>
+            <div class="prop-feat">🚿 1 sdb</div>
+            <div class="prop-feat">📐 38 m²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="agents" id="agents">
+  <div class="container">
+    <span class="section-tag">L'équipe</span>
+    <h2 class="section-title">Nos agents experts</h2>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-avatar">SC</div><h3>Sophie Clermont</h3><p>Paris – Île-de-France</p><div class="agent-stats"><div class="agent-stat"><strong>148</strong>Ventes</div><div class="agent-stat"><strong>4.9★</strong>Avis</div></div></div>
+      <div class="agent-card"><div class="agent-avatar">MR</div><h3>Marc Remy</h3><p>Lyon – Rhône-Alpes</p><div class="agent-stats"><div class="agent-stat"><strong>92</strong>Ventes</div><div class="agent-stat"><strong>4.8★</strong>Avis</div></div></div>
+      <div class="agent-card"><div class="agent-avatar">AB</div><h3>Anaïs Bernard</h3><p>Bordeaux – Gironde</p><div class="agent-stats"><div class="agent-stat"><strong>67</strong>Ventes</div><div class="agent-stat"><strong>5.0★</strong>Avis</div></div></div>
+      <div class="agent-card"><div class="agent-avatar">TL</div><h3>Thomas Leroi</h3><p>Marseille – PACA</p><div class="agent-stats"><div class="agent-stat"><strong>115</strong>Ventes</div><div class="agent-stat"><strong>4.7★</strong>Avis</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><h3>NEXT<span>HOME</span> REALTY</h3><p>Votre partenaire immobilier de confiance depuis 2009. Réseau national, expertise locale.</p></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Achat</a></li><li><a href="#">Location</a></li><li><a href="#">Gestion locative</a></li><li><a href="#">Estimation IA</a></li></ul></div>
+      <div class="footer-col"><h4>Villes</h4><ul><li><a href="#">Paris</a></li><li><a href="#">Lyon</a></li><li><a href="#">Bordeaux</a></li><li><a href="#">Marseille</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+33 1 80 00 00 00</a></li><li><a href="#">contact@nexthome.fr</a></li><li><a href="#">Agences</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 Nexthome Realty — Tous droits réservés</span><span>Carte professionnelle N° CPI 75012025</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

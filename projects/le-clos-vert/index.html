@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Le Clos Vert — Restaurant Gastronomique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--dark:#0f1a0f;--green:#1a3a1a;--gold:#c4a55a;--cream:#f5f0e4;--white:#fff;--gray:#8a9080;--border:rgba(196,165,90,.2)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:var(--dark);color:var(--cream)}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1140px;margin:0 auto;padding:0 40px}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 48px;height:80px;display:flex;align-items:center;background:rgba(15,26,15,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:3px;font-style:italic;color:var(--gold)}
+    .nav-links{display:flex;gap:40px}
+    .nav-links a{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,228,.6);transition:color .25s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-reserve{background:var(--gold);color:var(--dark);padding:10px 24px;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;transition:background .25s}
+    .nav-reserve:hover{background:#d4b56a}
+
+    /* HERO */
+    .hero{min-height:100vh;padding-top:80px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--dark)}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(26,58,26,.5) 0%,var(--dark) 70%)}
+    .hero-leaves{position:absolute;inset:0;opacity:.12;background-image:radial-gradient(circle,var(--gold) 1px,transparent 1px);background-size:60px 60px}
+    .hero-content{position:relative;z-index:2}
+    .hero-tag{font-size:.7rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,6rem);font-weight:300;line-height:1.1;margin-bottom:24px}
+    .hero h1 em{font-style:italic;color:var(--gold)}
+    .hero-divider{width:60px;height:1px;background:var(--border);margin:0 auto 24px}
+    .hero p{font-size:1rem;color:var(--gray);line-height:1.8;max-width:500px;margin:0 auto 40px}
+    .hero-btns{display:flex;gap:16px;justify-content:center}
+    .btn-gold{background:var(--gold);color:var(--dark);padding:16px 40px;font-size:.78rem;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:background .25s}
+    .btn-gold:hover{background:#d4b56a}
+    .btn-ghost{border:1px solid var(--border);color:var(--cream);padding:16px 40px;font-size:.78rem;letter-spacing:3px;text-transform:uppercase;transition:border-color .25s}
+    .btn-ghost:hover{border-color:var(--gold)}
+    .hero-ribbon{position:absolute;bottom:0;left:0;right:0;background:rgba(196,165,90,.06);border-top:1px solid var(--border);padding:24px;display:flex;justify-content:center;gap:80px}
+    .ribbon-item{text-align:center}
+    .ribbon-item span{display:block;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-top:4px}
+
+    /* MENU */
+    .menu{padding:120px 0;background:var(--green)}
+    .menu-header{text-align:center;margin-bottom:72px}
+    .section-tag{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;color:var(--cream)}
+    .menu-tabs{display:flex;justify-content:center;gap:0;margin-bottom:56px;border-bottom:1px solid var(--border)}
+    .menu-tab{padding:14px 32px;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .25s,border-color .25s}
+    .menu-tab.active{color:var(--gold);border-color:var(--gold)}
+    .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .menu-category h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--gold);margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .menu-item{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid rgba(196,165,90,.08)}
+    .menu-item:last-child{border-bottom:none}
+    .menu-item-info h4{font-size:.92rem;font-weight:400;margin-bottom:4px;color:var(--cream)}
+    .menu-item-info p{font-size:.78rem;color:var(--gray);font-style:italic}
+    .menu-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);white-space:nowrap}
+
+    /* EXPERIENCE */
+    .experience{padding:120px 0;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;gap:0}
+    .exp-visual{background:linear-gradient(135deg,var(--green),#0a140a);display:flex;align-items:center;justify-content:center;min-height:500px;position:relative;overflow:hidden}
+    .exp-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(196,165,90,.1),transparent 60%)}
+    .exp-circle{width:200px;height:200px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:4rem;color:rgba(196,165,90,.3)}
+    .exp-content{padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+    .exp-content h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;line-height:1.3;margin:12px 0 24px}
+    .exp-content p{font-size:.9rem;color:var(--gray);line-height:1.8;margin-bottom:32px}
+    .chef-sig{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:var(--gold)}
+
+    /* RESERVATION */
+    .reservation{padding:120px 0;background:var(--green);text-align:center}
+    .reservation h2{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;margin-bottom:16px}
+    .reservation p{color:var(--gray);margin-bottom:48px}
+    .resa-form{max-width:700px;margin:0 auto;background:rgba(15,26,15,.6);border:1px solid var(--border);padding:48px}
+    .resa-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+    .resa-field{display:flex;flex-direction:column;gap:8px;text-align:left}
+    .resa-field label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
+    .resa-field input,.resa-field select{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--cream);padding:14px 16px;font-family:'Jost',sans-serif;font-size:.88rem;outline:none;transition:border-color .25s;appearance:none}
+    .resa-field input:focus,.resa-field select:focus{border-color:var(--gold)}
+    .resa-field select option{background:var(--green)}
+
+    /* FOOTER */
+    footer{background:var(--dark);padding:60px 0 32px;border-top:1px solid var(--border)}
+    .footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:48px}
+    .footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--gold);margin-bottom:12px}
+    .footer-brand p{font-size:.82rem;color:var(--gray);line-height:1.7}
+    .footer-col h4{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+    .footer-col ul{display:flex;flex-direction:column;gap:10px}
+    .footer-col a{font-size:.82rem;color:var(--gray);transition:color .25s}
+    .footer-col a:hover{color:var(--cream)}
+    .footer-bottom{padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.75rem;color:rgba(138,144,128,.5)}
+
+    @media(max-width:768px){
+      .experience,.hero-ribbon{grid-template-columns:1fr;flex-direction:column;gap:32px}
+      .exp-visual{min-height:250px}
+      .exp-content{padding:48px 20px}
+      .menu-grid{grid-template-columns:1fr}
+      .resa-grid{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;gap:8px}
+      .container{padding:0 20px}
+      nav{padding:0 20px}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Le Clos Vert</div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#experience">Le chef</a></li>
+      <li><a href="#reservation">Réserver</a></li>
+    </ul>
+    <a href="#reservation" class="nav-reserve">Réserver</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-leaves"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Restaurant Gastronomique · Lyon</span>
+    <h1>Une cuisine<br/><em>vivante</em><br/>du terroir</h1>
+    <div class="hero-divider"></div>
+    <p>Une carte courte, des produits d'exception, un chef passionné. Venez vivre une expérience culinaire unique au cœur de Lyon.</p>
+    <div class="hero-btns">
+      <a href="#reservation" class="btn-gold">Réserver une table</a>
+      <a href="#menu" class="btn-ghost">Voir la carte</a>
+    </div>
+  </div>
+  <div class="hero-ribbon">
+    <div class="ribbon-item">⭐⭐ <span>2 étoiles Michelin</span></div>
+    <div class="ribbon-item">🌿 <span>Produits locaux</span></div>
+    <div class="ribbon-item">🍷 <span>Cave de 400 références</span></div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-header">
+      <span class="section-tag">La carte</span>
+      <h2 class="section-title">Nos suggestions du moment</h2>
+    </div>
+    <div class="menu-tabs">
+      <div class="menu-tab active">Entrées</div>
+      <div class="menu-tab">Plats</div>
+      <div class="menu-tab">Desserts</div>
+      <div class="menu-tab">Vins</div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-category">
+        <h3>Terre</h3>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Œuf parfait, truffe noire du Périgord</h4><p>Crème de chou-fleur, copeaux de truffe fraîche</p></div>
+          <div class="menu-price">38 €</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Terrine de foie gras maison</h4><p>Brioche toastée, chutney de figues, fleur de sel</p></div>
+          <div class="menu-price">32 €</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Carpaccio de cèpes frais</h4><p>Huile de noisette, parmesan 36 mois, roquette sauvage</p></div>
+          <div class="menu-price">26 €</div>
+        </div>
+      </div>
+      <div class="menu-category">
+        <h3>Mer</h3>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Tartare de Saint-Jacques</h4><p>Pomme granny, citron caviar, huile d'olive de Nyons</p></div>
+          <div class="menu-price">34 €</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Huîtres Gillardeau n°2</h4><p>Mignonette au champagne, citron, pain de seigle</p></div>
+          <div class="menu-price">28 €</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-info"><h4>Velouté de homard bleu</h4><p>Crème fouettée à l'estragon, pince confite</p></div>
+          <div class="menu-price">42 €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="exp-visual">
+    <div class="exp-circle">✦</div>
+  </div>
+  <div class="exp-content">
+    <span class="section-tag">Le chef</span>
+    <h2>Alexis Fontaine,<br/>une cuisine d'instinct</h2>
+    <p>Formé dans les plus grandes maisons françaises, Alexis Fontaine a fondé Le Clos Vert en 2016 avec une conviction : que la grande cuisine commence dans les champs, pas dans les cuisines.</p>
+    <p>Chaque matin, il sélectionne lui-même les produits auprès de producteurs locaux avec qui il entretient des relations de confiance depuis des années.</p>
+    <div class="chef-sig">Alexis Fontaine</div>
+  </div>
+</section>
+
+<section class="reservation" id="reservation">
+  <div class="container">
+    <h2>Réserver une table</h2>
+    <p>Disponible du mardi au samedi, midi et soir. Pensez à réserver à l'avance.</p>
+    <form class="resa-form">
+      <div class="resa-grid">
+        <div class="resa-field"><label>Prénom & Nom</label><input type="text" placeholder="Jean Dupont"/></div>
+        <div class="resa-field"><label>Téléphone</label><input type="tel" placeholder="+33 6 00 00 00 00"/></div>
+        <div class="resa-field"><label>Date</label><input type="date"/></div>
+        <div class="resa-field"><label>Nombre de couverts</label>
+          <select><option>1 personne</option><option>2 personnes</option><option>3-4 personnes</option><option>5-6 personnes</option><option>7+ personnes</option></select>
+        </div>
+        <div class="resa-field"><label>Service</label>
+          <select><option>Déjeuner (12h – 14h)</option><option>Dîner (19h – 21h30)</option></select>
+        </div>
+        <div class="resa-field"><label>Occasion spéciale</label>
+          <select><option>Aucune</option><option>Anniversaire</option><option>Mariage</option><option>Repas d'affaires</option></select>
+        </div>
+      </div>
+      <button type="submit" class="btn-gold" style="width:100%;border:none;cursor:pointer;margin-top:8px">Confirmer la réservation</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Le Clos Vert</h3>
+        <p>12 Rue de la République, 69001 Lyon<br/>+33 4 72 00 00 00<br/>contact@leclosvert.fr</p>
+      </div>
+      <div class="footer-col">
+        <h4>Le restaurant</h4>
+        <ul><li><a href="#">Notre histoire</a></li><li><a href="#">Le chef</a></li><li><a href="#">La cave</a></li><li><a href="#">Événements</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Horaires</h4>
+        <ul>
+          <li><a href="#">Mar – Sam : 12h – 14h</a></li>
+          <li><a href="#">Mar – Sam : 19h – 21h30</a></li>
+          <li><a href="#">Dim – Lun : Fermé</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Le Clos Vert — Restaurant Gastronomique</span>
+      <span>⭐⭐ Michelin 2025</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

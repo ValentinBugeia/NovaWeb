@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[NOM] — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../client/css/portal.css" />
+</head>
+<body>
+
+  <!-- ── ÉCRAN DE CONNEXION ── -->
+  <div id="adminLogin" class="auth-main">
+    <div class="auth-box">
+      <p class="font-mono c-blue" style="font-size:.78rem;margin-bottom:.5rem">// Accès restreint</p>
+      <h1 class="auth-title" style="font-size:1.5rem;margin-bottom:2rem">Panel administrateur</h1>
+      <form id="adminLoginForm">
+        <div class="form-field">
+          <label for="adminEmail">Email admin</label>
+          <input type="email" id="adminEmail" required />
+        </div>
+        <div class="form-field">
+          <label for="adminPassword">Mot de passe</label>
+          <input type="password" id="adminPassword" required />
+        </div>
+        <p class="auth-error" id="adminLoginError"></p>
+        <button type="submit" class="btn-auth"><span id="adminLoginLabel">Connexion</span><span>→</span></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── PANEL ADMIN ── -->
+  <div id="adminPanel" class="hidden">
+
+    <nav class="portal-nav">
+      <span class="nav-logo font-mono">
+        <span class="c-blue">&lt;</span>Admin<span class="c-blue">/&gt;</span>
+      </span>
+      <div class="nav-user">
+        <span class="font-mono c-blue" style="font-size:.72rem" id="adminUserEmail"></span>
+        <button class="btn-logout" id="adminLogout">Déconnexion</button>
+      </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+      <!-- Demandes de devis -->
+      <section style="margin-bottom:3.5rem">
+        <div class="dashboard-header" style="margin-bottom:1.25rem">
+          <div>
+            <span class="font-mono c-blue section-tag">// Demandes entrantes</span>
+            <h2 class="dashboard-title" style="font-size:2rem">Devis <span class="c-blue">reçus</span></h2>
+          </div>
+        </div>
+        <div id="devisWrap" class="admin-table-wrap">
+          <div class="state-msg"><div class="loading-dot"></div></div>
+        </div>
+      </section>
+
+      <!-- Gestion des projets -->
+      <section>
+        <div class="dashboard-header" style="margin-bottom:1.25rem">
+          <div>
+            <span class="font-mono c-blue section-tag">// Projets clients</span>
+            <h2 class="dashboard-title" style="font-size:2rem">Gestion des <span class="c-blue">projets</span></h2>
+          </div>
+          <button class="btn-new" id="addOrderBtn">+ Nouveau projet</button>
+        </div>
+        <div id="ordersWrap" class="admin-table-wrap">
+          <div class="state-msg"><div class="loading-dot"></div></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ── MODAL PROJET ── -->
+  <div class="modal-overlay hidden" id="orderModal">
+    <div class="modal-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+        <h3 id="modalHeading">Nouveau projet</h3>
+        <button class="btn-logout" id="modalClose" type="button">✕</button>
+      </div>
+
+      <form id="orderForm">
+        <input type="hidden" id="orderId" />
+
+        <div class="form-field">
+          <label for="oEmail">Email client</label>
+          <input type="email" id="oEmail" placeholder="jean@email.com" required />
+        </div>
+        <div class="form-field">
+          <label for="oTitle">Nom du projet</label>
+          <input type="text" id="oTitle" placeholder="Ex: Site vitrine Boulangerie Martin" required />
+        </div>
+        <div class="form-field">
+          <label for="oType">Type</label>
+          <select id="oType">
+            <option value="Site Vitrine">Site Vitrine</option>
+            <option value="E-commerce">E-commerce</option>
+            <option value="Landing Page">Landing Page</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="oStatus">Statut</label>
+            <select id="oStatus">
+              <option value="pending">En attente</option>
+              <option value="in-progress">En cours</option>
+              <option value="review">En révision</option>
+              <option value="delivered">Livré</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="oStep">Étape (0 → 5)</label>
+            <input type="number" id="oStep" min="0" max="5" value="0" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="oNotes">Message pour le client</label>
+          <textarea id="oNotes" placeholder="Visible dans le dashboard client..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-auth" style="margin-top:.5rem">
+          <span id="modalSubmitLabel">Créer le projet</span>
+          <span>→</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="../firebase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

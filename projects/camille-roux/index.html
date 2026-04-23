@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Camille Roux — Photographe</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#080808;--white:#f5f5f5;--gray:#888;--border:rgba(255,255,255,.1)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--white);cursor:none}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 40px}
+
+    /* CURSOR */
+    .cursor-dot{width:8px;height:8px;background:var(--white);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+    .cursor-circle{width:40px;height:40px;border:1px solid rgba(255,255,255,.4);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:transform .15s ease}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 48px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:1.1rem;letter-spacing:1px}
+    .nav-links{display:flex;gap:32px}
+    .nav-links a{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);transition:color .25s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-contact{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:border-color .25s}
+    .nav-contact:hover{border-color:var(--white)}
+
+    /* HERO */
+    .hero{height:100vh;display:flex;align-items:flex-end;padding:0 48px 80px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0d0d0d,#1a1a1a)}
+    .hero-bg{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;opacity:.4}
+    .hero-col{display:flex;flex-direction:column;gap:2px}
+    .hero-col:nth-child(2){margin-top:40px}
+    .hero-col:nth-child(3){margin-top:-40px}
+    .hero-img{flex:1;background:rgba(255,255,255,.05);min-height:200px}
+    .hero-img--1{background:linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+    .hero-img--2{background:linear-gradient(135deg,#0d0d0d,#1a1a1a)}
+    .hero-img--3{background:linear-gradient(135deg,#222,#333)}
+    .hero-img--4{background:linear-gradient(135deg,#111,#222)}
+    .hero-img--5{background:linear-gradient(135deg,#1a1a1a,#111)}
+    .hero-img--6{background:linear-gradient(135deg,#2d2d2d,#1a1a1a)}
+    .hero-content{position:relative;z-index:2}
+    .hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,7vw,7rem);line-height:.95;margin-bottom:24px}
+    .hero h1 em{font-style:italic;display:block;color:var(--gray)}
+    .hero-sub{display:flex;align-items:flex-end;gap:48px}
+    .hero-desc{font-size:.88rem;color:var(--gray);line-height:1.7;max-width:280px}
+    .hero-cta{border:1px solid rgba(255,255,255,.3);padding:14px 32px;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;transition:background .25s,color .25s;white-space:nowrap}
+    .hero-cta:hover{background:var(--white);color:var(--bg)}
+
+    /* GALLERY */
+    .gallery{padding:120px 0;background:var(--bg)}
+    .gallery-header{padding:0 48px;display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+    .section-label{font-size:.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:8px}
+    .section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,3rem)}
+    .filter-tabs{display:flex;gap:24px}
+    .filter-tab{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);cursor:pointer;transition:color .25s;padding-bottom:4px;border-bottom:1px solid transparent}
+    .filter-tab.active,.filter-tab:hover{color:var(--white);border-color:var(--white)}
+    .masonry{columns:3;gap:8px;padding:0 48px}
+    .masonry-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer}
+    .masonry-img{width:100%;display:block;transition:transform .5s}
+    .masonry-item:hover .masonry-img{transform:scale(1.03)}
+    .masonry-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+    .masonry-item:hover .masonry-overlay{opacity:1}
+    .masonry-overlay h3{font-family:'DM Serif Display',serif;font-size:1rem}
+    .masonry-overlay p{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:4px}
+    .img-h1{height:300px;background:linear-gradient(135deg,#1a1a1a,#2a2a2a)}
+    .img-h2{height:200px;background:linear-gradient(135deg,#111,#1d1d1d)}
+    .img-h3{height:400px;background:linear-gradient(135deg,#222,#181818)}
+    .img-h4{height:250px;background:linear-gradient(135deg,#0d0d0d,#222)}
+    .img-h5{height:350px;background:linear-gradient(135deg,#1a1a1a,#0d0d0d)}
+    .img-h6{height:280px;background:linear-gradient(135deg,#2a2a2a,#111)}
+
+    /* ABOUT */
+    .about{padding:120px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;background:var(--bg)}
+    .about-img{height:500px;background:linear-gradient(135deg,#111,#1d1d1d);position:relative;overflow:hidden}
+    .about-img::after{content:'CR';position:absolute;right:-20px;bottom:-20px;font-family:'DM Serif Display',serif;font-size:8rem;color:rgba(255,255,255,.04);line-height:1}
+    .about-content .section-label{color:var(--gray)}
+    .about-content h2{font-family:'DM Serif Display',serif;font-size:2.5rem;line-height:1.15;margin:12px 0 24px}
+    .about-content h2 em{font-style:italic;color:var(--gray)}
+    .about-content p{font-size:.9rem;color:var(--gray);line-height:1.8;margin-bottom:20px}
+    .about-link{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;display:inline-block;margin-top:12px}
+
+    /* SERVICES */
+    .services{padding:0 48px 120px;display:flex;flex-direction:column;gap:0}
+    .service-row{display:flex;justify-content:space-between;align-items:center;padding:32px 0;border-top:1px solid var(--border)}
+    .service-row:last-child{border-bottom:1px solid var(--border)}
+    .service-num{font-size:.75rem;letter-spacing:2px;color:var(--gray)}
+    .service-name{font-family:'DM Serif Display',serif;font-size:1.5rem;transition:font-style .25s}
+    .service-row:hover .service-name{font-style:italic}
+    .service-price{font-size:.82rem;color:var(--gray)}
+    .service-arrow{font-size:1.2rem;color:var(--gray);transition:transform .3s}
+    .service-row:hover .service-arrow{transform:translateX(8px)}
+
+    /* CONTACT */
+    .contact{padding:120px 48px;text-align:center}
+    .contact h2{font-family:'DM Serif Display',serif;font-size:clamp(2.5rem,5vw,5rem);line-height:1.1;margin-bottom:24px}
+    .contact h2 em{font-style:italic;color:var(--gray)}
+    .contact p{font-size:.9rem;color:var(--gray);margin-bottom:40px}
+    .contact-email{font-family:'DM Serif Display',serif;font-size:1.5rem;border-bottom:1px solid var(--white);padding-bottom:4px;transition:color .25s}
+    .contact-email:hover{color:var(--gray)}
+
+    /* FOOTER */
+    footer{padding:40px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+    footer p{font-size:.75rem;color:var(--gray)}
+    .footer-socials{display:flex;gap:20px}
+    .footer-socials a{font-size:.75rem;color:var(--gray);letter-spacing:1px;text-transform:uppercase;transition:color .25s}
+    .footer-socials a:hover{color:var(--white)}
+
+    @media(max-width:768px){
+      nav{padding:20px 24px}.nav-links{display:none}
+      .hero,.gallery-header,.masonry,.about,.services,.contact,.footer{padding-left:20px;padding-right:20px}
+      .masonry{columns:1}
+      .about{grid-template-columns:1fr}
+      .about-img{height:280px}
+      .hero h1{font-size:3rem}
+      .service-name{font-size:1.1rem}
+      footer{flex-direction:column;gap:16px;text-align:center}
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot" id="dot"></div>
+<div class="cursor-circle" id="circle"></div>
+
+<nav>
+  <div class="nav-logo">Camille Roux</div>
+  <ul class="nav-links">
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+  </ul>
+  <a href="#contact" class="nav-contact">Booking</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-col"><div class="hero-img hero-img--1"></div><div class="hero-img hero-img--2"></div></div>
+    <div class="hero-col"><div class="hero-img hero-img--3"></div><div class="hero-img hero-img--4"></div></div>
+    <div class="hero-col"><div class="hero-img hero-img--5"></div><div class="hero-img hero-img--6"></div></div>
+  </div>
+  <div class="hero-content">
+    <h1>Capturer<br/><em>l'instant vrai</em></h1>
+    <div class="hero-sub">
+      <p class="hero-desc">Photographe basée à Paris. Spécialisée en portrait, mode et mariage. Disponible en France et à l'international.</p>
+      <a href="#gallery" class="hero-cta">Voir le portfolio</a>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="gallery-header">
+    <div>
+      <span class="section-label">Portfolio</span>
+      <h2 class="section-title">Sélection de travaux</h2>
+    </div>
+    <div class="filter-tabs">
+      <div class="filter-tab active">Tout</div>
+      <div class="filter-tab">Portrait</div>
+      <div class="filter-tab">Mode</div>
+      <div class="filter-tab">Mariage</div>
+    </div>
+  </div>
+  <div class="masonry">
+    <div class="masonry-item"><div class="masonry-img img-h1"></div><div class="masonry-overlay"><h3>Portrait — Studio</h3><p>Série lumière naturelle</p></div></div>
+    <div class="masonry-item"><div class="masonry-img img-h3"></div><div class="masonry-overlay"><h3>Mode — Editorial</h3><p>Vogue Paris, 2024</p></div></div>
+    <div class="masonry-item"><div class="masonry-img img-h5"></div><div class="masonry-overlay"><h3>Mariage — Château</h3><p>Château de Vaux-le-Vicomte</p></div></div>
+    <div class="masonry-item"><div class="masonry-img img-h4"></div><div class="masonry-overlay"><h3>Portrait — Extérieur</h3><p>Série urbaine Paris</p></div></div>
+    <div class="masonry-item"><div class="masonry-img img-h2"></div><div class="masonry-overlay"><h3>Mode — Backstage</h3><p>Fashion Week 2024</p></div></div>
+    <div class="masonry-item"><div class="masonry-img img-h6"></div><div class="masonry-overlay"><h3>Mariage — Cérémonie</h3><p>Provence, Juin 2024</p></div></div>
+  </div>
+</section>
+
+<div class="about" id="about">
+  <div class="about-img"></div>
+  <div class="about-content">
+    <span class="section-label">À propos</span>
+    <h2>Une œil pour<br/><em>l'essentiel</em></h2>
+    <p>Je suis Camille Roux, photographe professionnelle depuis 10 ans. Mon approche est documentaire : je capte les émotions vraies, les lumières naturelles, les instants qui ne se reproduisent pas.</p>
+    <p>Après une formation aux Arts Décoratifs de Paris, j'ai collaboré avec des marques comme Sandro, Maje et Jacquemus, ainsi qu'avec des centaines de couples pour immortaliser leur journée.</p>
+    <a href="#contact" class="about-link">Travaillons ensemble →</a>
+  </div>
+</div>
+
+<div class="services" id="services">
+  <div class="service-row"><span class="service-num">01</span><span class="service-name">Portrait</span><span class="service-price">à partir de 350 €</span><span class="service-arrow">→</span></div>
+  <div class="service-row"><span class="service-num">02</span><span class="service-name">Shooting Mode & Editorial</span><span class="service-price">à partir de 800 €</span><span class="service-arrow">→</span></div>
+  <div class="service-row"><span class="service-num">03</span><span class="service-name">Photographie de Mariage</span><span class="service-price">à partir de 2 500 €</span><span class="service-arrow">→</span></div>
+  <div class="service-row"><span class="service-num">04</span><span class="service-name">Événement & Corporate</span><span class="service-price">sur devis</span><span class="service-arrow">→</span></div>
+  <div class="service-row"><span class="service-num">05</span><span class="service-name">Prints & Tirages d'art</span><span class="service-price">à partir de 90 €</span><span class="service-arrow">→</span></div>
+</div>
+
+<section class="contact" id="contact">
+  <h2>Construisons<br/>quelque chose <em>ensemble</em></h2>
+  <p>Disponible pour des projets en France et à l'international.</p>
+  <a href="mailto:hello@camilleroux.fr" class="contact-email">hello@camilleroux.fr</a>
+</section>
+
+<footer>
+  <p>© 2025 Camille Roux Photography</p>
+  <div class="footer-socials">
+    <a href="#">Instagram</a>
+    <a href="#">Behance</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const dot = document.getElementById('dot');
+  const circle = document.getElementById('circle');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function move(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;circle.style.left=rx+'px';circle.style.top=ry+'px';requestAnimationFrame(move)})();
+  document.querySelectorAll('.filter-tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.filter-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active')}));
+</script>
+</body>
+</html>

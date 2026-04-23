@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[NOM] — Page introuvable</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #06060f; --blue: #00BFFF; --gray: #6b7280; --white: #f0f0f5; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem; overflow: hidden;
+    }
+    .container { max-width: 560px; }
+    .code {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(5rem, 20vw, 9rem);
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(0,191,255,.3);
+      line-height: 1;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem; color: var(--blue);
+      letter-spacing: .1em; margin-bottom: 1.25rem;
+    }
+    h1 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 900; margin-bottom: .75rem; }
+    p  { color: var(--gray); font-size: .9rem; line-height: 1.6; margin-bottom: 2rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: var(--blue); color: #000;
+      font-family: 'Space Mono', monospace; font-size: .85rem; font-weight: 700;
+      padding: .9rem 2rem; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .85; }
+    canvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .5;
+    }
+    .container { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div class="container">
+    <p class="tag">// Erreur 404</p>
+    <div class="code">404</div>
+    <h1>Cette page n'existe pas</h1>
+    <p>La page que vous cherchez a été déplacée, supprimée ou n'a jamais existé.<br />Pas de panique — l'accueil est juste là.</p>
+    <a href="./" class="btn"><span>← Retour à l'accueil</span></a>
+  </div>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    let W, H, pts = [];
+    function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    for (let i = 0; i < 40; i++) pts.push({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4
+    });
+    (function frame() {
+      ctx.clearRect(0,0,W,H);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x<0) p.x=W; if (p.x>W) p.x=0;
+        if (p.y<0) p.y=H; if (p.y>H) p.y=0;
+        ctx.beginPath(); ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(0,191,255,.4)'; ctx.fill();
+      });
+      for (let i=0;i<pts.length;i++) for (let j=i+1;j<pts.length;j++) {
+        const d = Math.hypot(pts[i].x-pts[j].x, pts[i].y-pts[j].y);
+        if (d<120) {
+          ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle = `rgba(0,191,255,${(1-d/120)*.15})`; ctx.lineWidth=.5; ctx.stroke();
+        }
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>

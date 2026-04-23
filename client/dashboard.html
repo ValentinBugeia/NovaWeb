@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[NOM] — Mes Projets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/portal.css" />
+</head>
+<body>
+
+  <nav class="portal-nav">
+    <a href="../" class="nav-logo font-mono">
+      <span class="c-blue">&lt;</span>[NOM]<span class="c-blue">/&gt;</span>
+    </a>
+    <a href="../" class="nav-back font-mono">← Retour au site</a>
+    <div class="nav-user">
+      <span class="font-mono c-blue" id="userGreeting"></span>
+      <button class="btn-logout" id="logoutBtn">Déconnexion</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <span class="font-mono c-blue section-tag">// Espace Client</span>
+        <h1 class="dashboard-title">Mes <span class="c-blue">projets</span></h1>
+      </div>
+      <a href="../#devis" class="btn-new">+ Nouveau devis</a>
+    </div>
+
+    <div id="ordersGrid" class="orders-grid">
+      <div id="ordersLoading" class="state-msg">
+        <div class="loading-dot"></div>
+        <p class="font-mono" style="color:var(--gray)">Chargement de vos projets...</p>
+      </div>
+      <div id="ordersEmpty" class="state-msg hidden">
+        <p class="font-mono c-blue" style="font-size:2.5rem;margin-bottom:.75rem">// 00</p>
+        <p style="margin-bottom:1.5rem;color:var(--gray)">Aucun projet en cours.<br/>Demandez votre premier devis !</p>
+        <a href="../#devis" class="btn-auth" style="display:inline-flex;width:auto;padding:.85rem 2rem">Demander un devis →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="../firebase-config.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
