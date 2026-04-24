@@ -330,6 +330,7 @@ ul { list-style: none; }
 .hero__cosmo spline-viewer {
   display: block;
   width: 680px; height: 680px;
+  pointer-events: none;
 }
 @keyframes cosmo-float {
   0%, 100% { transform: translateY(-50%); }
