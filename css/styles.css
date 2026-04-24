@@ -1585,17 +1585,23 @@ ul { list-style: none; }
   .nav.scrolled { padding: 14px 24px; }
   .nav__center { display: none; }
   .nav__client  { display: none; }
-  .hero { padding: 120px 24px 120px; }
+  .hero { padding: 120px 24px 100px; }
   .hero__stats {
     position: static; flex-direction: row; gap: 1.5rem;
-    margin-top: 40px;
-    flex-wrap: wrap;
+    margin-top: 40px; flex-wrap: wrap;
   }
   .scroll-hint { display: none; }
   .hero__sub { flex-direction: column; gap: 24px; align-items: flex-start; }
   .service-item { grid-template-columns: 60px 1fr; gap: 20px; padding: 28px 0; }
   .service-item__num { font-size: 2.5rem; }
-  .process-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+  .process-card { padding: 32px 24px; }
+  .process-card__num { font-size: 2.8rem; }
+  .portfolio-item__thumb { min-height: 320px; }
+  .portfolio-item__info { padding: 36px 24px; }
+  .devis-layout { gap: 32px; }
+  .apropos-layout { gap: 32px; }
+  .faq-q { gap: 16px; padding: 20px 0; }
   .footer-top { flex-direction: column; gap: 24px; text-align: center; }
   .footer-nav { flex-wrap: wrap; justify-content: center; }
   .footer-bottom { flex-direction: column; gap: 8px; align-items: center; }
@@ -1604,13 +1610,61 @@ ul { list-style: none; }
   .apropos-values { grid-template-columns: 1fr; }
   .scroll-top { bottom: 88px; right: 20px; }
   .chatbot { bottom: 20px; right: 20px; }
-  .chatbot__panel { width: calc(100vw - 40px); right: 0; }
+  .chatbot__panel { width: calc(100vw - 40px); }
+  .chatbot__messages { max-height: 45vh; }
+  .btn-main { padding: 12px 12px 12px 22px; font-size: .85rem; }
+  .btn-main__arrow { width: 36px; height: 36px; margin-left: 12px; }
 }
 
-
 @media (max-width: 520px) {
-  .process-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
+  .container { padding: 0 16px; }
+  .section { padding: 64px 0; }
+  .nav { padding: 14px 16px; }
+  .hero { padding: 100px 16px 80px; }
   .hero__word { letter-spacing: -1px; }
-  .portfolio-item__thumb { min-height: 260px; }
+  .hero__sub p { font-size: .95rem; }
+  .hero__stats { gap: 1rem; }
+  .hero__badge { gap: 8px; }
+  .process-grid { grid-template-columns: 1fr; }
+  .process-card { padding: 28px 20px; }
+  .process-card__num { font-size: 2.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .portfolio-item__thumb { min-height: 240px; }
+  .portfolio-item__info { padding: 28px 16px; }
+  .portfolio-item__info h3 { font-size: 1.2rem; }
+  .service-item { grid-template-columns: 50px 1fr; gap: 14px; padding: 22px 0; }
+  .service-item__num { font-size: 2rem; }
+  .service-item__body h3 { font-size: 1.1rem; }
+  .chatbot__panel { width: calc(100vw - 32px); max-height: 80vh; }
+  .chatbot { bottom: 16px; right: 16px; }
+  .scroll-top { bottom: 80px; right: 16px; width: 40px; height: 40px; }
+  .footer-nav { gap: 12px; }
+  .footer-nav a { font-size: .75rem; }
+  .btn-main { padding: 10px 10px 10px 18px; font-size: .8rem; }
+  .btn-main__arrow { width: 32px; height: 32px; margin-left: 8px; font-size: .9rem; }
+}
+
+@media (max-width: 400px) {
+  .container { padding: 0 14px; }
+  .section { padding: 56px 0; }
+  .hero { padding: 90px 14px 70px; }
+  .nav { padding: 12px 14px; }
+  .nav__devis { padding: 8px 14px; font-size: .8rem; }
+  .hero__sub p { font-size: .9rem; }
+  .service-item { grid-template-columns: 44px 1fr; gap: 12px; padding: 18px 0; }
+  .service-item__num { font-size: 1.6rem; }
+  .service-item__body h3 { font-size: 1rem; }
+  .service-item__body p { font-size: .82rem; }
+  .process-card { padding: 24px 16px; }
+  .process-card__num { font-size: 1.8rem; }
+  .process-card h3 { font-size: .85rem; }
+  .portfolio-item__thumb { min-height: 200px; }
+  .portfolio-item__info { padding: 24px 14px; }
+  .chatbot__toggle { width: 50px; height: 50px; }
+  .chatbot__panel { width: calc(100vw - 28px); }
+  .chatbot { bottom: 14px; right: 14px; }
+  .faq-q { font-size: .85rem; padding: 16px 0; }
+  .footer-nav a { font-size: .7rem; }
+  .promo-bar { flex-wrap: wrap; gap: 4px; justify-content: center; padding: 8px 14px; }
+  .promo-bar__tag { display: none; }
 }
