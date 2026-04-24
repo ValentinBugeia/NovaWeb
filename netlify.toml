@@ -1,6 +1,10 @@
 [build]
   publish = "."
-  functions = "netlify/functions"
+  command = "cd netlify/functions && npm install"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 # Redirige /api/chat vers la Netlify Function (pas besoin de changer le JS)
 [[redirects]]
@@ -8,7 +12,6 @@
   to   = "/.netlify/functions/chat"
   status = 200
 
-# Pages légales et secondaires
 [[redirects]]
   from = "/404"
   to   = "/404.html"
