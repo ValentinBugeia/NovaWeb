@@ -315,6 +315,7 @@ ul { list-style: none; }
   width: 540px; height: 540px;
   z-index: 3;
   animation: cosmo-float 5s ease-in-out infinite;
+  will-change: transform;
 }
 .hero__cosmo::after {
   content: '';

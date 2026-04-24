@@ -143,23 +143,33 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 ───────────────────────────────────────── */
 (function initCanvas() {
   const canvas = document.getElementById('canvas');
-  const ctx    = canvas.getContext('2d');
-  const COUNT  = 70;
-  const LINK   = 150;
+  const ctx    = canvas.getContext('2d', { alpha: true });
+  const COUNT  = 40;
+  const LINK   = 130;
+  const FPS    = 30;
+  const STEP   = 1000 / FPS;
   let W, H, pts = [];
   let mx = -9999, my = -9999;
+  let lastTs = 0, visible = true;
 
+  let resizeTimer;
   function resize() {
     W = canvas.width  = canvas.parentElement.offsetWidth;
     H = canvas.height = canvas.parentElement.offsetHeight;
   }
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
 
-  window.addEventListener('resize', () => { resize(); });
   document.addEventListener('mousemove', e => {
     const r = canvas.getBoundingClientRect();
     mx = e.clientX - r.left;
     my = e.clientY - r.top;
-  });
+  }, { passive: true });
+
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 })
+    .observe(canvas.parentElement);
 
   class Pt {
     constructor() {
@@ -194,7 +204,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   resize();
   pts = Array.from({ length: COUNT }, () => new Pt());
 
-  (function frame() {
+  (function frame(ts) {
+    requestAnimationFrame(frame);
+    if (!visible || ts - lastTs < STEP) return;
+    lastTs = ts;
     ctx.clearRect(0, 0, W, H);
     for (let i = 0; i < pts.length; i++) {
       pts[i].tick();
@@ -211,8 +224,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
         }
       }
     }
-    requestAnimationFrame(frame);
-  })();
+  })(0);
 })();
 
 /* ─────────────────────────────────────────
@@ -330,6 +342,23 @@ scrollTopBtn.addEventListener('click', () => {
   }, { threshold: 0.15 });
   observer.observe(hero);
 })();
+
+/* ─────────────────────────────────────────
+   COSMO — chargement Spline différé
+───────────────────────────────────────── */
+window.addEventListener('load', () => {
+  const container = document.getElementById('cosmoContainer');
+  if (!container) return;
+  const script = document.createElement('script');
+  script.type = 'module';
+  script.src  = 'https://unpkg.com/@splinetool/viewer@1.12.88/build/spline-viewer.js';
+  script.onload = () => {
+    const viewer = document.createElement('spline-viewer');
+    viewer.setAttribute('url', 'https://prod.spline.design/xOC0lAEzP97HA9oP/scene.splinecode');
+    container.prepend(viewer);
+  };
+  document.head.appendChild(script);
+});
 
 /* ─────────────────────────────────────────
    COSMO — clic pour ouvrir le chat
