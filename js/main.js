@@ -319,6 +319,19 @@ scrollTopBtn.addEventListener('click', () => {
 });
 
 /* ─────────────────────────────────────────
+   TOGGLE CHATBOT : masqué dans le hero
+───────────────────────────────────────── */
+(function initChatbotVisibility() {
+  const hero    = document.getElementById('home');
+  const chatbot = document.getElementById('chatbot');
+  if (!hero || !chatbot) return;
+  const observer = new IntersectionObserver(([entry]) => {
+    chatbot.classList.toggle('hero-hidden', entry.isIntersecting);
+  }, { threshold: 0.15 });
+  observer.observe(hero);
+})();
+
+/* ─────────────────────────────────────────
    COSMO — clic pour ouvrir le chat
 ───────────────────────────────────────── */
 const cosmoClick = document.getElementById('cosmoClick');

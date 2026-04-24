@@ -312,7 +312,7 @@ ul { list-style: none; }
 .hero__cosmo {
   position: absolute;
   right: 0; top: 50%; transform: translateY(-50%);
-  width: 680px; height: 680px;
+  width: 540px; height: 540px;
   z-index: 3;
   animation: cosmo-float 5s ease-in-out infinite;
 }
@@ -321,7 +321,7 @@ ul { list-style: none; }
   position: absolute;
   bottom: 60px; left: 50%;
   transform: translateX(-50%);
-  width: 260px; height: 40px;
+  width: 200px; height: 32px;
   background: radial-gradient(ellipse, rgba(0,191,255,.35) 0%, transparent 70%);
   border-radius: 50%;
   animation: cosmo-shadow 5s ease-in-out infinite;
@@ -329,7 +329,7 @@ ul { list-style: none; }
 }
 .hero__cosmo spline-viewer {
   display: block;
-  width: 680px; height: 680px;
+  width: 540px; height: 540px;
   pointer-events: none;
 }
 /* Overlay cliquable */
@@ -374,9 +374,13 @@ ul { list-style: none; }
   0%, 100% { opacity: .7; transform: translateX(-50%) scaleX(1); }
   50%       { opacity: .3; transform: translateX(-50%) scaleX(.7); }
 }
+/* Toggle caché dans le hero, visible après scroll */
+.chatbot { transition: opacity .4s, transform .4s; }
+.chatbot.hero-hidden { opacity: 0; pointer-events: none; transform: scale(.8); }
+
 @media (max-width: 1200px) {
-  .hero__cosmo { width: 520px; height: 520px; }
-  .hero__cosmo spline-viewer { width: 520px; height: 520px; }
+  .hero__cosmo { width: 420px; height: 420px; }
+  .hero__cosmo spline-viewer { width: 420px; height: 420px; }
 }
 @media (max-width: 768px) {
   .hero__cosmo { display: none; }
