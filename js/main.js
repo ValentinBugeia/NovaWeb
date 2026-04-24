@@ -333,16 +333,21 @@ scrollTopBtn.addEventListener('click', () => {
 /* ─────────────────────────────────────────
    TOGGLE CHATBOT : masqué dans le hero
 ───────────────────────────────────────── */
+let heroInView = false;
 (function initChatbotVisibility() {
   const hero    = document.getElementById('home');
   const chatbot = document.getElementById('chatbot');
   if (!hero || !chatbot) return;
-  const observer = new IntersectionObserver(([entry]) => {
-    const shouldHide = entry.isIntersecting && !chatbot.classList.contains('open');
-    chatbot.classList.toggle('hero-hidden', shouldHide);
-  }, { threshold: 0.15 });
-  observer.observe(hero);
+  new IntersectionObserver(([entry]) => {
+    heroInView = entry.isIntersecting;
+    chatbot.classList.toggle('hero-hidden', heroInView && !chatbot.classList.contains('open'));
+  }, { threshold: 0.15 }).observe(hero);
 })();
+
+function closeChatbot(chatbot) {
+  chatbot.classList.remove('open');
+  if (heroInView) chatbot.classList.add('hero-hidden');
+}
 
 /* ─────────────────────────────────────────
    COSMO — chargement Spline différé
@@ -402,18 +407,15 @@ if (cosmoClick) {
   });
 
   // Boutons header panel
-  closeBtn.addEventListener('click', () => {
-    chatbot.classList.remove('open');
-  });
-  minimizeBtn.addEventListener('click', () => {
-    chatbot.classList.remove('open');
-  });
+  closeBtn.addEventListener('click', () => closeChatbot(chatbot));
+  minimizeBtn.addEventListener('click', () => closeChatbot(chatbot));
 
   // Open / close
   toggle.addEventListener('click', () => {
-    chatbot.classList.toggle('open');
+    const isOpen = chatbot.classList.toggle('open');
     bubble.classList.add('hidden');
-    if (chatbot.classList.contains('open')) input.focus();
+    if (isOpen) input.focus();
+    else if (heroInView) chatbot.classList.add('hero-hidden');
   });
 
   // Chips de questions suggérées
