@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Redirige /api/chat vers la Netlify Function (pas besoin de changer le JS)
+[[redirects]]
+  from = "/api/chat"
+  to   = "/.netlify/functions/chat"
+  status = 200
+
+# Pages légales et secondaires
+[[redirects]]
+  from = "/404"
+  to   = "/404.html"
+  status = 404
