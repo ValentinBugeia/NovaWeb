@@ -308,6 +308,23 @@ ul { list-style: none; }
   position: absolute; inset: 0; width: 100%; height: 100%;
 }
 
+/* Cosmo — modèle Spline 3D */
+.hero__cosmo {
+  position: absolute;
+  right: -60px; top: 50%; transform: translateY(-50%);
+  width: 680px; height: 680px;
+  z-index: 1; pointer-events: none;
+}
+.hero__cosmo spline-viewer {
+  width: 100%; height: 100%;
+}
+@media (max-width: 1200px) {
+  .hero__cosmo { width: 520px; height: 520px; right: -80px; }
+}
+@media (max-width: 768px) {
+  .hero__cosmo { display: none; }
+}
+
 /* Grid overlay */
 .hero::before {
   content: '';
