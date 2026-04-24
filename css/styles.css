@@ -302,7 +302,7 @@ ul { list-style: none; }
   min-height: 100vh;
   display: flex; align-items: center;
   padding: 180px 40px 100px;
-  position: relative; overflow: hidden;
+  position: relative;
 }
 .hero__canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -311,15 +311,16 @@ ul { list-style: none; }
 /* Cosmo — modèle Spline 3D */
 .hero__cosmo {
   position: absolute;
-  right: -60px; top: 50%; transform: translateY(-50%);
+  right: 0; top: 50%; transform: translateY(-50%);
   width: 680px; height: 680px;
   z-index: 1; pointer-events: none;
 }
 .hero__cosmo spline-viewer {
   width: 100%; height: 100%;
+  --spline-background: transparent;
 }
 @media (max-width: 1200px) {
-  .hero__cosmo { width: 520px; height: 520px; right: -80px; }
+  .hero__cosmo { width: 520px; height: 520px; }
 }
 @media (max-width: 768px) {
   .hero__cosmo { display: none; }
