@@ -278,6 +278,44 @@ const portIO = new IntersectionObserver((entries) => {
 document.querySelectorAll('.services-list, .process-grid').forEach(el => portIO.observe(el));
 
 /* ─────────────────────────────────────────
+   FIREBASE — chargement lazy au scroll vers #devis
+───────────────────────────────────────── */
+let firebaseReady = false;
+function loadFirebase() {
+  if (firebaseReady) return;
+  firebaseReady = true;
+  const FBVER = '9.22.0';
+  const BASE  = `https://www.gstatic.com/firebasejs/${FBVER}`;
+  function loadScript(src, cb) {
+    const s = document.createElement('script'); s.src = src;
+    s.onload = cb; document.head.appendChild(s);
+  }
+  loadScript(`${BASE}/firebase-app-compat.js`, () =>
+    loadScript(`${BASE}/firebase-auth-compat.js`, () =>
+      loadScript(`${BASE}/firebase-firestore-compat.js`, () => {
+        const cfg = {
+          apiKey:            'AIzaSyBildTHqqg78xfJoLa4KyNft45N1WNP2wQ',
+          authDomain:        'novaweb-1ea10.firebaseapp.com',
+          projectId:         'novaweb-1ea10',
+          storageBucket:     'novaweb-1ea10.firebasestorage.app',
+          messagingSenderId: '535739925790',
+          appId:             '1:535739925790:web:e1dd9d021d1da5b0a1f50f',
+        };
+        if (!firebase.apps.length) firebase.initializeApp(cfg);
+        window.db = firebase.firestore();
+      })
+    )
+  );
+}
+
+const devisSection = document.getElementById('devis');
+if (devisSection) {
+  new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) { loadFirebase(); obs.disconnect(); }
+  }, { rootMargin: '200px' }).observe(devisSection);
+}
+
+/* ─────────────────────────────────────────
    FORM SUBMIT — sauvegarde dans Firestore
 ───────────────────────────────────────── */
 document.getElementById('devisForm').addEventListener('submit', async function (e) {

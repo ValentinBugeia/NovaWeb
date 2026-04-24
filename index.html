@@ -18,7 +18,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <!-- Préchargement Spline -->
   <link rel="preconnect" href="https://unpkg.com" crossorigin />
@@ -316,7 +316,7 @@
       <div class="portfolio-item reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/cabinet-moreau/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/cabinet-moreau.jpg" alt="Cabinet Juridique Moreau" class="pf-screenshot"/>
+            <img src="assets/screenshots/cabinet-moreau.jpg" alt="Cabinet Juridique Moreau" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -335,7 +335,7 @@
       <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/elara-paris/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/elara-paris.jpg" alt="Élara Paris" class="pf-screenshot"/>
+            <img src="assets/screenshots/elara-paris.jpg" alt="Élara Paris" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -354,7 +354,7 @@
       <div class="portfolio-item reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/le-clos-vert/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/le-clos-vert.jpg" alt="Le Clos Vert" class="pf-screenshot"/>
+            <img src="assets/screenshots/le-clos-vert.jpg" alt="Le Clos Vert" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -373,7 +373,7 @@
       <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/nexthome-realty/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/nexthome-realty.jpg" alt="Nexthome Realty" class="pf-screenshot"/>
+            <img src="assets/screenshots/nexthome-realty.jpg" alt="Nexthome Realty" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -392,7 +392,7 @@
       <div class="portfolio-item reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/fitcoach-pro/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/fitcoach-pro.jpg" alt="FitCoach Pro" class="pf-screenshot"/>
+            <img src="assets/screenshots/fitcoach-pro.jpg" alt="FitCoach Pro" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -411,7 +411,7 @@
       <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/taskflow-analytics/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/taskflow-analytics.jpg" alt="TaskFlow Analytics" class="pf-screenshot"/>
+            <img src="assets/screenshots/taskflow-analytics.jpg" alt="TaskFlow Analytics" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -430,7 +430,7 @@
       <div class="portfolio-item reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/camille-roux/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/camille-roux.jpg" alt="Camille Roux Photography" class="pf-screenshot"/>
+            <img src="assets/screenshots/camille-roux.jpg" alt="Camille Roux Photography" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -449,7 +449,7 @@
       <div class="portfolio-item portfolio-item--reverse reveal-fade" style="--d:0s">
         <div class="portfolio-item__thumb">
           <a href="projects/skillup-academy/" target="_blank" class="pf-screenshot-link">
-            <img src="assets/screenshots/skillup-academy.jpg" alt="SkillUp Academy" class="pf-screenshot"/>
+            <img src="assets/screenshots/skillup-academy.jpg" alt="SkillUp Academy" class="pf-screenshot" loading="lazy" decoding="async"/>
             <div class="pf-screenshot-hover"><span>Voir le site →</span></div>
           </a>
         </div>
@@ -831,10 +831,6 @@
     </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
