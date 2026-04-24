@@ -352,7 +352,7 @@ function closeChatbot(chatbot) {
 /* ─────────────────────────────────────────
    COSMO — chargement Spline différé
 ───────────────────────────────────────── */
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('cosmoContainer');
   if (!container) return;
   const script = document.createElement('script');
