@@ -332,6 +332,40 @@ ul { list-style: none; }
   width: 680px; height: 680px;
   pointer-events: none;
 }
+/* Overlay cliquable */
+.hero__cosmo-click {
+  position: absolute; inset: 0;
+  z-index: 4; cursor: pointer;
+}
+.hero__cosmo-click:hover ~ .hero__cosmo-bubble,
+.hero__cosmo:hover .hero__cosmo-bubble {
+  opacity: 1; transform: translateY(0);
+}
+
+/* Bulle de dialogue */
+.hero__cosmo-bubble {
+  position: absolute;
+  top: 14%; left: 50%; transform: translateX(-50%) translateY(6px);
+  background: var(--bg2);
+  border: 1px solid rgba(0,191,255,.35);
+  border-radius: 18px 18px 18px 4px;
+  padding: 10px 16px;
+  font-size: .8rem; color: var(--white); white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0,0,0,.4), 0 0 12px rgba(0,191,255,.15);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+  z-index: 5;
+}
+.hero__cosmo-bubble::after {
+  content: '';
+  position: absolute; bottom: -8px; left: 18px;
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(0,191,255,.35);
+}
+
 @keyframes cosmo-float {
   0%, 100% { transform: translateY(-50%); }
   50%       { transform: translateY(calc(-50% - 22px)); }

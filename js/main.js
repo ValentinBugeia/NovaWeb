@@ -319,6 +319,21 @@ scrollTopBtn.addEventListener('click', () => {
 });
 
 /* ─────────────────────────────────────────
+   COSMO — clic pour ouvrir le chat
+───────────────────────────────────────── */
+const cosmoClick = document.getElementById('cosmoClick');
+if (cosmoClick) {
+  cosmoClick.addEventListener('click', () => {
+    const chatbot = document.getElementById('chatbot');
+    const input   = document.getElementById('chatbotInput');
+    const bubble  = document.getElementById('chatbotBubble');
+    chatbot.classList.add('open');
+    bubble && bubble.classList.add('hidden');
+    setTimeout(() => input && input.focus(), 350);
+  });
+}
+
+/* ─────────────────────────────────────────
    CHATBOT
 ───────────────────────────────────────── */
 (function initChatbot() {
