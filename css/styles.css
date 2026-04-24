@@ -314,10 +314,30 @@ ul { list-style: none; }
   right: 0; top: 50%; transform: translateY(-50%);
   width: 680px; height: 680px;
   z-index: 3;
+  animation: cosmo-float 5s ease-in-out infinite;
+}
+.hero__cosmo::after {
+  content: '';
+  position: absolute;
+  bottom: 60px; left: 50%;
+  transform: translateX(-50%);
+  width: 260px; height: 40px;
+  background: radial-gradient(ellipse, rgba(0,191,255,.35) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: cosmo-shadow 5s ease-in-out infinite;
+  filter: blur(8px);
 }
 .hero__cosmo spline-viewer {
   display: block;
   width: 680px; height: 680px;
+}
+@keyframes cosmo-float {
+  0%, 100% { transform: translateY(-50%); }
+  50%       { transform: translateY(calc(-50% - 22px)); }
+}
+@keyframes cosmo-shadow {
+  0%, 100% { opacity: .7; transform: translateX(-50%) scaleX(1); }
+  50%       { opacity: .3; transform: translateX(-50%) scaleX(.7); }
 }
 @media (max-width: 1200px) {
   .hero__cosmo { width: 520px; height: 520px; }
