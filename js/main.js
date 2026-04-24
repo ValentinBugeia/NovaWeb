@@ -338,7 +338,8 @@ scrollTopBtn.addEventListener('click', () => {
   const chatbot = document.getElementById('chatbot');
   if (!hero || !chatbot) return;
   const observer = new IntersectionObserver(([entry]) => {
-    chatbot.classList.toggle('hero-hidden', entry.isIntersecting);
+    const shouldHide = entry.isIntersecting && !chatbot.classList.contains('open');
+    chatbot.classList.toggle('hero-hidden', shouldHide);
   }, { threshold: 0.15 });
   observer.observe(hero);
 })();
@@ -369,6 +370,7 @@ if (cosmoClick) {
     const chatbot = document.getElementById('chatbot');
     const input   = document.getElementById('chatbotInput');
     const bubble  = document.getElementById('chatbotBubble');
+    chatbot.classList.remove('hero-hidden');
     chatbot.classList.add('open');
     bubble && bubble.classList.add('hidden');
     setTimeout(() => input && input.focus(), 350);
